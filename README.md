@@ -14,7 +14,7 @@ User can answer questions or contribute something by commenting in a post.
 User can upvote or downvote a post or comment to make a post more valid or more up in the timeline of others.  
 ### 5 - Reporting   
 User can report a post or comment for violation of rules so that admins can take actions on that.  
-### 6 - Save a post / Question  
+### 6 - Save a Post / Question  
 User can save a post so that he/she can find it easily when it needed.  
 ### 7 - Adding tags  
 User / Admin can add tags in a post so that, we can filter post by those tags.  
