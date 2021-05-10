@@ -1,0 +1,91 @@
+.topbar{
+  width: auto;
+  height: 20vw;
+  background-color:#0D1E20;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.text{
+  color: white;
+  font-family: 'Saira Semi Condensed';
+  font-size: 5vw;
+  float: left;
+  margin-left: 50px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition:all .5s;
+}
+.box{
+  position: absolute;
+  font-size: 2vw;
+  color: white;
+  top:30%;
+  left:70%;
+}
+.login{
+  position: absolute;
+  top:10%;
+  left: 80%;
+  color:#1CC1CB;
+  font-size: 20px;
+  border: 3px solid #1CC1CB;
+  padding: 2px;
+  float: right;
+}
+.glow{
+  text-shadow: 0 0 5px #fff,
+   0 0 10px #fff, 0 0 15px #8BDAF3,
+   0 0 20px #0073e6, 0 0 25px #8BDAF3;
+}
+.navbar_custom{
+  background-color: black;
+}
+.custom-toggler.navbar-toggler {
+            border-color:#8BDAF3 ;
+        }
+.custom-toggler .navbar-toggler-icon {
+            background-image: url(
+          "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(28, 193, 203, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+.mew{
+  font-family: 'Saira Semi Condensed' ;
+  color: #8BDAF3;
+}
+.mew:hover{
+  color: white;
+  text-shadow: 0 0 5px #fff,
+   0 0 10px #8BDAF3, 0 0 15px #8BDAF3;
+}
+.navbar-nav > li{
+  margin-left:30px;
+  margin-right:30px;
+}
+#ask{
+  position: relative;
+  top: 100px;
+  left:40px;
+}
+#fn{
+  position: relative;
+  top: 100px;
+  display: none;
+}
+#text{
+margin: 60px;
+}
+#myQ{
+  position: relative;
+  top: 100px;
+  margin: 40px;
+}
+#final{
+  display: none;
+}
+#dhet{
+  position: relative;
+  display: block;
+  text-align: center;
+}
