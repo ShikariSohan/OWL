@@ -23,7 +23,7 @@ We will upgrade GUI for the website to make it more user friendly.
 ### 9 - Searching
 User can search questions/posts.  
 ### 10 - Contributor Points  
-User can get contributor points can earn badges by contrubute in a post.
+User can get contributor points can earn badges by contribute in a post.
 ### 11 - Community  
 User can create a private community and other users can join.  
 
