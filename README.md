@@ -28,6 +28,14 @@ User can get contributor points can earn badges by contribute in a post.
 User can create a private community and other users can join.  
 
 ***
+## Report on Learning Pre-requisites :
+SL | Learning Task | Description | Status | Comment |
+--:|:--------------|:------------|:------:|---------|
+1  | Web Basics    | Basics of HTML, CSS, Javascript | ![ ](https://img.shields.io/badge/HTML-Learned-green) ![ ](https://img.shields.io/badge/CSS-Learned-green) ![ ](https://img.shields.io/badge/Javascript-Learned-green) | Learned by both |
+2  | Database      | MongoDB | ![ ](https://img.shields.io/badge/MongoDB-Critical%20May%2030-critical) | Both will work on it |
+3   | Back-end API | NodeJS | ![ ](https://img.shields.io/badge/NodeJS-Critical%20June%2010-critical) |  Both will work on it|
+3   | Back-end web Application Framework | ExpressJS | ![ ](https://img.shields.io/badge/ExpressJS-Critical%20June%2020-critical) |  Both will work on it|
+***
 ## Developers :
 ### 1 . Kongka Rani Mozumder
 Reg no: 2018331086
