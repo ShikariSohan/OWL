@@ -22,21 +22,32 @@
      </div>
      </div>
         <div class="form p-4 col">
-        <form action="#" method="POST">
+        <form action="/signup" method="POST">
           <h3>Sign Up for free!</h3>
+          <%- include ('./partial/flash') %> 
             <div class="container">
                 <label for="name"><b>Your Name</b></label>
-                <input type="text" placeholder="Enter your name.." name="reg"  required>
+                <input type="text" placeholder="enter your name.." name="name"  required>
                 <label for="reg"><b>Reg no of SUST</b></label>
-                 <input type="text" placeholder="Registration Number" name="reg"  required>
-                 <label for="dept"><b>Department</b></label>
-                 <input type="text" placeholder="Department" name="dept"  required>
-                <label for="email"><b>Enter your Mail</b></label>
-                 <input type="text" placeholder="Enter your email.." name="email" required>
+                 <input type="text" placeholder="registration Number" name="reg"  required>
+                 <!-- <label for="dept"><b>Department</b></label>
+                 <input type="text" placeholder="Department" name="dept"  required> -->
+                 <!-- shikari starts -->
+                 <label for="department"><b>Department</b></label>
+                 <input list="department" name="department" required>
+                 <datalist id="department">
+                   <% for(let dept of departments) { %>
+                     <option value=<%= dept %>>  
+                   <% } %>
+                 </datalist>
+                 <hr>
+                 <!-- shikari ends -->
+                <label for="email"><b>Enter your Email</b></label>
+                 <input type="text" placeholder="enter your email.." name="email" required>
                  <label for="password"><b>Password</b></label>
                  <input type="password" placeholder="password" name="password" required>
                  <button type="submit">Submit</button>
-                 <p style="text-align: center;">Already a Member?<a href="/login">Login</a></p>
+                 <p style="text-align: center;">Already a Member? <a href="/login">Login</a></p>
             </div>
         </form>
      </div>

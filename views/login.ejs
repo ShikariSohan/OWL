@@ -16,19 +16,20 @@
  <div class="wrapper" id="login">
       <div class="w-75 m-auto justify-content-center row" id="log">
           <div class="col">
-        <h2 style="color: cornsilk;">Welcome to Sust Forum!</h2>
-       <img src="img/owl.svg" width="300" height="300"  alt=" hiiiiiiiii">
+        <h2 style="color: rgb(253, 247, 224);">Welcome to Sust Forum!</h2>
+       <img src="img/owl.svg" width="300" height="300"  alt="owlllllll">
        </div>
           <div class="form p-4 col">
-          <form action="#" method="POST">
+          <form action="/login" method="POST" novalidate>
             <h3>Login to your Account!</h3>
+            <%- include ('./partial/flash') %>
               <div class="container">
                   <label for="email"><b>Email Address</b></label>
-                   <input type="text" placeholder="Enter your email.." name="email" size="50" required>
+                   <input type="text" placeholder="Enter your email.." name="email"size="50" required>
                    <label for="password"><b>Password</b></label>
                    <input type="password" placeholder="password" name="password" required>
                    <button type="submit">Login</button>
-                   <p style="text-align: center;">Not a Member?<a href="/SignUp">Sign Up</a></p>
+                   <p style="text-align: center;">Not a Member?<a href="/signup">Sign Up</a></p>
               </div>
           </form>
        </div>

@@ -3,7 +3,21 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const colors = require('colors');
-mongoose.connect('mongodb://localhost:27017/posts',{useNewUrlParser: true})
+const session = require('express-session');
+const flash = require('connect-flash');
+const signupRouter = require('./routers/signup');
+const loginRouter = require('./routers/login');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+const {isLoggedin} = require('./utilities/middlewares');
+
+
+mongoose.connect('mongodb://localhost:27017/owl',
+    { useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    })
 .then(()=>{
     console.log("Connected to databases!!".rainbow)
 })
@@ -12,27 +26,44 @@ mongoose.connect('mongodb://localhost:27017/posts',{useNewUrlParser: true})
     console.log(err)
 })
 
-
-
 app.use(express.static(__dirname + '/public'));
+
+const sessionConfig = {
+    secret:"Shikari Is awesome",
+    resave:false,
+    saveUninitialized:true,
+}
+
+app.use(session(sessionConfig));
+app.use(flash());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine","ejs");
 app.set('views', path.join(__dirname, '/views'));
-app.get('/', (req, res) => {
-        res.render("login");
-    
-})
-app.get('/login', (req, res) => {
-    res.render("login");
 
-})
-app.get('/SignUp', (req, res) => {
-    res.render("SignUp");
+app.use(passport.initialize());
+app.use(passport.session());
 
-})
+passport.use(new LocalStrategy( { usernameField : 'email' },User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req,res,next)=>{
+    res.locals.error = req.flash('error');
+    next();
+});
+
+app.use('/signup',signupRouter);
+app.use('/',loginRouter);
 
 
-var port = process.env.PORT || 2727 ;
+app.get('/', isLoggedin,(req, res) => {
+    res.render("home");
+});
+
+const port = process.env.PORT || 2727 ;
 app.listen(port, ()=>{
     console.log(`Listening to the ${port} !!!!!`.brightYellow);
 });
