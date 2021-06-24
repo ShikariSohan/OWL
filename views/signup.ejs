@@ -34,13 +34,12 @@
                  <input type="text" placeholder="Department" name="dept"  required> -->
                  <!-- shikari starts -->
                  <label for="department"><b>Department</b></label>
-                 <input list="department" name="department" required>
+                 <input type="text" list="department" name="department" placeholder="Department ex:CSE, EEE..."required >
                  <datalist id="department">
                    <% for(let dept of departments) { %>
                      <option value=<%= dept %>>  
                    <% } %>
                  </datalist>
-                 <hr>
                  <!-- shikari ends -->
                 <label for="email"><b>Enter your Email</b></label>
                  <input type="text" placeholder="enter your email.." name="email" required>
