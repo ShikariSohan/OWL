@@ -21,6 +21,10 @@ User  =  new schema({
     department : {
         type : String ,
         required : true
+    },
+    image:{
+        url: String,
+        filename: String
     }
 
 

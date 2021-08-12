@@ -105,6 +105,13 @@ margin-right: auto;
 padding: 50px;
 transition: all 0.3s ease;
 }
+#myAcc{
+    position: relative;
+    align-self: center;
+    width:auto;
+    margin: auto;
+    transition: all 0.3s ease;
+    }
 #sidebar ul.components {
     padding: 5px;
     transition: all 0.3s ease;
@@ -204,4 +211,25 @@ bottom: 0;
 }
 #signup{
     display: none;
+}
+.avatar{
+    vertical-align: middle;
+    margin: auto;
+   border-radius: 50%;
+}
+.time{
+    font-size: small;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-bottom: rgba(166, 168, 168, 0.788) 1px solid;
+}
+.avatar1{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.avatar2{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }

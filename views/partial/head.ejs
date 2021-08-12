@@ -9,83 +9,14 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
     <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
     <title>Owl</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-    <button type="button" id="sidebarCollapse" data-toggle="collapse">
-        <span class="lnr lnr-menu" style="color: rgb(255, 255, 255);"></span>
-    </button>    
-    <a class="navbar-brand" href="/">SUSTForum</a>  
-    <form class="form-inline">
-      <div class="search-area d-flex">
-      <input class="form-control" type="text" placeholder="Search.." aria-label="Search">
-      <i class="fa fa-search "></i>
-      </div>
-    </form>
-<ul class="navbar-nav mr-4 ml-auto">
-  <div class="d-flex">
-<li class="nav-item active">
- <a class="nav-link" href="#"><i class="fa fa-user "></i><span class="sr-only">(current)</span></a>
-</li>
-<li class="nav-item ">
-  <a class="nav-link" href="#"><i class="fa fa-bell "></i></a>
- </li>
- <li class="nav-item">
-    <i class="nav-link details fa fa-info"></i>
-   </li>
-</div>
-</ul>
-</nav>
+<%- include("navbar") %>
 <div id = "content">
-<nav id="sidebar">
-
-    <ul class="list-unstyled components">
-        <li class="active">
-            <a href="/" >Home</a>   
-        </li>
-        <li>
-            <a href="#">Notifications</a>
-        </li>
-        <li>
-            <a href="#">Join a Community</a>
-        </li>
-        <li>
-            <a href="#">Create Community</a>
-        </li>
-        <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Community</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li class="drpd">
-                    <a href="#">CSE 2018</a>
-                </li >
-                <li class="drpd">
-                    <a href="#">SUST IICT</a>
-                </li>
-                <li class="drpd">
-                    <a href="#">2/2 Geeks</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">Reading List</a>
-        </li>
-        <li>
-            <a href="#">Acheveiments</a>
-        </li>
-        <li>
-            <a href="#">My Account</a>
-        </li>
-        <li>
-            <a href="#">Settings</a>
-        </li>
-        <li>
-            <a href="/logout">Logout</a>
-        </li>
-    </ul>
-</nav>
 
   
     

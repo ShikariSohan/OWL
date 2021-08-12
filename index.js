@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== "production")
+{
+    require("dotenv").config();
+}
 const express = require("express");
 const app = express();
 const path = require('path');
@@ -5,13 +9,22 @@ const mongoose = require('mongoose');
 const colors = require('colors');
 const session = require('express-session');
 const flash = require('connect-flash');
+const ejsLint = require('ejs-lint');
+const time_ago = require('javascript-time-ago');
+const en = require('javascript-time-ago/locale/en');
+const Post = require('./models/post');
 const signupRouter = require('./routers/signup');
 const loginRouter = require('./routers/login');
+const accRouter = require('./routers/myAcc');
+const postRouter = require('./routers/post');
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const {isLoggedin} = require('./utilities/middlewares');
 
+time_ago.addDefaultLocale(en);
+const timeAgo = new time_ago('en-US');
 
 mongoose.connect('mongodb://localhost:27017/owl',
     { useNewUrlParser: true,
@@ -51,17 +64,22 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
+    res.locals.currentUser = req.user;
     res.locals.error = req.flash('error');
     next();
 });
 
 app.use('/signup',signupRouter);
 app.use('/',loginRouter);
+app.use('/profile',isLoggedin,accRouter);
+app.use('/post',isLoggedin,postRouter);
 
-
-app.get('/', isLoggedin,(req, res) => {
-    res.render("home");
+//home
+app.get('/', isLoggedin,async(req, res) => {
+    const posts =  await Post.find({}).sort('-createdAt');      
+    res.render("home",{posts,timeAgo});
 });
+//home end
 
 const port = process.env.PORT || 2727 ;
 app.listen(port, ()=>{

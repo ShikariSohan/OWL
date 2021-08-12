@@ -1,0 +1,42 @@
+<%- include("partial/head") %>
+<link rel="stylesheet" href="/css/imgPreview.css">
+<div class="m-4 p-4">
+        <form action="/post/new" method="POST" enctype="multipart/form-data" >
+            <div class="form-group">
+              <label for="title"><h5>Add Title</h5></label>
+              <input type="text" class="form-control" name="post[title]" id="title" aria-describedby="title_des" placeholder="Add title" required>
+              <small id="title_des" class="form-text text-muted">Add a simple title</small>
+            </div>
+            <div class="form-group">
+                <label for="description"><h5>Description</h5></label>
+                <textarea class="form-control" name="post[description]" id="description" rows="13" cols="80" required>
+                </textarea>
+            </div>            
+            <div class="form-group">
+              <h5>Add Images</h5><br>
+              <label id="lab-img" for="image">
+                <i class="fa fa-plus imgAdd"></i>
+              </label>
+            <input type="file" id="image" name="image" class="img" style="width: 0px;height: 0px;overflow: hidden;" accept="image/*" multiple>
+            <div class="container">
+              <div class="row">
+              </div>
+              </div>
+            </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+          
+    </div>
+ <script>
+     var editor = CKEDITOR.replace( 'description');
+      editor.on( 'contentDom', function() {
+       var editable = editor.editable();
+       editable.attachListener( editable, 'click', function( evt ) {
+      var link = new CKEDITOR.dom.elementPath( evt.data.getTarget(), this ).contains( 'a' );
+    if ( link && evt.data.$.button != 2) {
+      window.open( link.getAttribute( 'href' ) );
+    }
+  }, null, null, 15 );
+} );
+</script>
+ <%- include("partial/foot") %>

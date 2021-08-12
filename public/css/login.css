@@ -5,13 +5,17 @@
 
 
 body{
-    background-color: rgb(2, 3, 7);
+    background-color:#f2feff;
+    
     
 }
 #log{
-    background-color: rgb(162, 209, 255);
+    background-image: url("img/back.svg");
+    background-repeat: repeat;
+    background-color: #9bf0f7;
     height: fit-content;
     padding: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
 .form{
@@ -55,6 +59,7 @@ input[type=text], input[type=password] {
   }
   button:hover{
     opacity: 0.8;
+    
 }
 .row{
     float: none;
@@ -64,6 +69,7 @@ input[type=text], input[type=password] {
 }
 
 .wrapper{
+   
     padding: 50px;
     width: fit-content;
     height: fit-content;

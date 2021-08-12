@@ -1,0 +1,18 @@
+<% for(let post of posts){ %> 
+    <div class = "NewPost">
+        <div class="time">
+         <a href="#" class="pr-3"><p ><%=timeAgo.format((post.createdAt.getTime()))%></p></a>
+         <a href="#">
+            <!--<i class="fas fa-edit"></i>-->
+            <h5><%=post.title%></h5>
+        </a>
+        <h5>Posted by<%=post.author.name%> </h5>
+        </div>
+        <p><%=post.description%></p>
+        <% if( post.image.length>0 ){%>
+        <% for(let img of post.image) {%>
+            <img src="<%=img.url>%>" alt="">
+        <%}%>
+        <%}%>
+        </div>
+        <% } %>

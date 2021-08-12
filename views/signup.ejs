@@ -15,26 +15,26 @@
 <body >
 <div class="wrapper">
     <div class="w-75 m-auto justify-content-center row" id="log">
-        <div class="col">
+         <div class="col">
       <h2 style="color: cornsilk;"> Join your fellow learner for free!</h2>
       <div class="d-flex p-0 m-0">
-     <img src="img/owl2.svg" width="350px" height="350px"  alt=" hiiiiiiiii" id ="img1">
+     <img src="img/owl2.svg" alt=" hiiiiiiiii" id ="img1">
      </div>
      </div>
         <div class="form p-4 col">
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" enctype="multipart/form-data">
           <h3>Sign Up for free!</h3>
           <%- include ('./partial/flash') %> 
             <div class="container">
                 <label for="name"><b>Your Name</b></label>
-                <input type="text" placeholder="enter your name.." name="name"  required>
+                <input type="text" placeholder="enter your name.." name="user[name]"  required>
                 <label for="reg"><b>Reg no of SUST</b></label>
-                 <input type="text" placeholder="registration Number" name="reg"  required>
+                 <input type="text" placeholder="registration Number" name="user[reg]"  required>
                  <!-- <label for="dept"><b>Department</b></label>
                  <input type="text" placeholder="Department" name="dept"  required> -->
                  <!-- shikari starts -->
                  <label for="department"><b>Department</b></label>
-                 <input type="text" list="department" name="department" placeholder="Department ex:CSE, EEE..."required >
+                 <input type="text" list="department" name="user[department]" placeholder="Department ex:CSE, EEE..."required >
                  <datalist id="department">
                    <% for(let dept of departments) { %>
                      <option value=<%= dept %>>  
@@ -42,9 +42,11 @@
                  </datalist>
                  <!-- shikari ends -->
                 <label for="email"><b>Enter your Email</b></label>
-                 <input type="text" placeholder="enter your email.." name="email" required>
+                 <input type="text" placeholder="enter your email.." name="user[email]" required>
                  <label for="password"><b>Password</b></label>
-                 <input type="password" placeholder="password" name="password" required>
+                 <input type="password" placeholder="password" name="user[password]" required>
+                 <label for="image"><b>Choose Avatar</b></label>
+                 <input type="file" name="image" id="">
                  <button type="submit">Submit</button>
                  <p style="text-align: center;">Already a Member? <a href="/login">Login</a></p>
             </div>
