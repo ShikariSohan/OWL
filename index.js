@@ -26,7 +26,7 @@ const {isLoggedin} = require('./utilities/middlewares');
 time_ago.addDefaultLocale(en);
 const timeAgo = new time_ago('en-US');
 
-mongoose.connect('mongodb://localhost:27017/owl',
+mongoose.connect(process.env.mongoCloudURL,
     { useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true

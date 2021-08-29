@@ -1,6 +1,4 @@
-
-  $(document).on("click", "i.del", function () {
-    
+$(document).on("click", "i.del", function () {
     $(this).parent().remove();
   });
   $(function () {
