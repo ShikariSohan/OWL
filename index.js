@@ -10,8 +10,6 @@ const colors = require('colors');
 const session = require('express-session');
 const flash = require('connect-flash');
 const ejsLint = require('ejs-lint');
-const time_ago = require('javascript-time-ago');
-const en = require('javascript-time-ago/locale/en');
 const Post = require('./models/post');
 const signupRouter = require('./routers/signup');
 const loginRouter = require('./routers/login');
@@ -22,9 +20,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const {isLoggedin} = require('./utilities/middlewares');
-
-time_ago.addDefaultLocale(en);
-const timeAgo = new time_ago('en-US');
+const timeAgo = require('./utilities/timeAgo');
 
 mongoose.connect(process.env.mongoCloudURL,
     { useNewUrlParser: true,
@@ -73,6 +69,7 @@ app.use('/signup',signupRouter);
 app.use('/',loginRouter);
 app.use('/profile',isLoggedin,accRouter);
 app.use('/post',isLoggedin,postRouter);
+
 
 //home
 app.get('/', isLoggedin,async(req, res) => {

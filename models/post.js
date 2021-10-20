@@ -19,7 +19,7 @@ const PostSchema = new Schema({
             url:String,
             filename:String
         }
-    ]
+    ],
        
 },
 {

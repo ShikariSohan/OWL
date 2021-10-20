@@ -1,11 +1,10 @@
 <%- include("partial/head") %>
 <%- include("partial/sidebar_left") %>
 <div id="bdy">
-<% for(let post of posts){ %> 
     <div class="card mb-4" style="width: 40rem;" >
         <div class="card-body">
           <div class="card-title mb-2" style=" border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
-            <a href="/post/<%=post._id%>" class='m-0 p-0 ' style="color: black;"><h5 class='m-0 p-0'><%=post.title%></h5></a>
+            <h5 class='m-0 p-0'><%=post.title%></h5>
             <p class="m-0 p-0 pb-2" style="font-size: small;"><%=timeAgo.format((post.createdAt.getTime()))%></p>
           </div>
           <div class="card-text m-2 p-2">
@@ -34,7 +33,6 @@
          
        <%}%>
         </div>
-        <a class="btn btn-outline-info" href="/post/<%=post._id%>" role="button">See The Comments</a>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author.name%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2"><b><%= post.author.name %></b></p>
         </a>
@@ -42,17 +40,32 @@
         </div>
         
       </div>
+    <div>
+      <p>Add a Comment</p>
+      <form action="/post/<%=post._id%>/new/comment" method="POST">
+        <div class="form-group">
+            <textarea class="form-control" name="comment" id="comment" rows="4" cols="150" required>
+            </textarea>
+        </div>            
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+  <% for(let comment of comments){ %> 
+
+    <div class="card border-light mb-3" >
+      <div class="card-body">
+        <p class="card-text"><%= comment.comment %> </p>
+      </div>
+      <div class="card-footer">
+        <div style="float: right;"><a class="d-flex" href="/profile/<%=comment.author.name%>"><img src="<%=comment.author.image.url %>" class="avatar1" >
+        <p class="card-text ml-2"><b><%= comment.author.name %></b></p></a>
+        </div>
+      </div>
+    </div>
+    <% } %> 
     
-    <%}%>
 </div>
 <%- include("partial/sidebar_right") %>
 <%- include("partial/foot") %>
 
-
-
-<div id="carouselPosts" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
   
