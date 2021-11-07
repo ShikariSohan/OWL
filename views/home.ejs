@@ -35,7 +35,7 @@
        <%}%>
         </div>
         <a class="btn btn-outline-info" href="/post/<%=post._id%>" role="button">See The Comments</a>
-          <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author.name%>"><img src="<%=post.author.image.url %>" class="avatar1" >
+          <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2"><b><%= post.author.name %></b></p>
         </a>
           </div>
