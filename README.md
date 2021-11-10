@@ -32,9 +32,9 @@ User can create a private community and other users can join.
 SL | Learning Task | Description | Status | Comment |
 --:|:--------------|:------------|:------:|---------|
 1  | Web Basics    | Basics of HTML, CSS, Javascript | ![ ](https://img.shields.io/badge/HTML-Learned-green) ![ ](https://img.shields.io/badge/CSS-Learned-green) ![ ](https://img.shields.io/badge/Javascript-Learned-green) | Learned by both |
-2  | Database      | MongoDB | ![ ](https://img.shields.io/badge/MongoDB-Critical%20May%2030-critical) | Both will work on it |
-3   | Back-end API | NodeJS | ![ ](https://img.shields.io/badge/NodeJS-Critical%20June%2010-critical) |  Both will work on it|
-3   | Back-end web Application Framework | ExpressJS | ![ ](https://img.shields.io/badge/ExpressJS-Critical%20June%2020-critical) |  Both will work on it|
+2  | Database      | MongoDB | ![ ](https://img.shields.io/badge/MongoDB-LEARNED-green) | Learned by both |
+3   | Back-end API | NodeJS | ![ ](https://img.shields.io/badge/NodeJS-LEARNED-green) |  Learned by both|
+3   | Back-end web Application Framework | ExpressJS | ![ ](https://img.shields.io/badge/ExpressJS-LEARNED-green) |  Learned by both|
 ***
 ## Developers :
 ### 1 . Kongka Rani Mozumder
