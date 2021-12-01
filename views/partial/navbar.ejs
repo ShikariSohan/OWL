@@ -1,28 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-    <button type="button" id="sidebarCollapse" data-toggle="collapse">
-        <span class="lnr lnr-menu" style="color: rgb(255, 255, 255);"></span>
-    </button>    
-    <a class="navbar-brand" href="/">Owl</a>  
-    <form class="form-inline">
-      <div class="search-area d-flex">
-      <input class="form-control" type="text" placeholder="Search.." aria-label="Search">
-      <i class="fa fa-search "></i>
-      </div>
-    </form>
+<nav class="navbar navbar-expand-sm navbar-custom fixed-top">
+  
+    <!-- Left elements -->
+    
+    <button class="navItem" type="button" id="sidebarCollapse" data-toggle="collapse">
+        <span class="lnr lnr-menu mr-4" style="color: rgb(0, 0, 0);"></span>
+    </button>   
+    <a class="navbar-brand  me-2 mb-1 d-flex align-items-center" href="/">
+      <div class="navItem" style="width: fit-content;">
+      <img
+        src="img/owl.ico"
+        width="70px"
+        alt=""
+        loading="lazy"
+        style="margin-top: 2px;"
+
+      />
+    </div>
+    </a>
+    
+    <ul class="navbar-nav mr-2 ml-auto">
+        <li class="nav-item  home">
+          <a class="nav-link" href="/"><i class="fa fa-home" style="font-size:18px"></i></a>
+        </li>
+    </ul>
+
+
+ <form class="form-inline my-2 my-lg-0">
+   <div class="searchbar">
+    <input class="form-control form-control-sm" type="text" placeholder="&#xf002;  search.." aria-label=".form-control-sm example">  
+  </div>
+  </form>
+  
+
+    
 <ul class="navbar-nav mr-4 ml-auto">
-  <div class="d-flex">
-<li class="nav-item active">
-      <a class="nav-link" href="/post/new"><i class="fa fa-plus "></i><span class="sr-only">(current)</span></a>
+  
+  <div class="container-fluid d-flex justify-content-end">
+<li class="nav-item my-3 searchIcon">
+    <i class="nav-link fa fa-search" style="font-size:18px;"></i>
+</li>
+    
+<li class="nav-item my-3">
+  <a class="nav-link" href="/post/new"><i class="fa fa-plus " style="font-size:18px"></i><span class="sr-only">(current)</span></a>
 </li>
 
-<li class="nav-item ">
-  <a class="nav-link" href="#"><i class="fa fa-bell "></i></a>
+<li class="nav-item my-3">
+  <a class="nav-link" href="#"><i class="fa fa-bell" style="font-size:18px"></i></a>
  </li>
- <li class="nav-item">
-  <a class="nav-link mt-0" href="/profile/<%=currentUser.name%>"><img src="<%=currentUser.image.url %>" class="avatar2"><b class="ml-2"><%=currentUser.name%></b></a>
+ <li class="nav-item my-3">
+  <a class="nav-link " href="/profile/<%=currentUser.name%>"><img src="<%=currentUser.image.url %>" class="avatar2"><b class="ml-2" style="font-size: bold;"><%=currentUser.name%></b></a>
  </li>
- <li class="nav-item">
-    <i class="nav-link details fa fa-info"></i>
+ <li class="nav-item my-3">
+    <i class="nav-link details fa fa-info" style="font-size:15px"></i>
    </li>
    
 </div>
