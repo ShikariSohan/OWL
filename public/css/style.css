@@ -160,6 +160,16 @@ a[data-toggle="collapse"] {
     width: fit-content;
 }
 @media (max-width: 575px){
+    .fa-arrow-left{
+        margin-top: -1.50rem;
+    }
+    
+    .searchbar{
+        
+        margin-top: -1.10rem;
+    } 
+    
+
     #sidebarCollapse,.navbar-brand{
         margin-top: -2.50rem;  
         padding-top: -2.50rem; 
@@ -175,10 +185,12 @@ a[data-toggle="collapse"] {
 
 
 }
-
+@media (max-width:900px) {
+    
+}
 @media (max-width: 768px) {
    
-    
+   
     
     .home{
         display: none;
@@ -194,11 +206,10 @@ a[data-toggle="collapse"] {
     }
    
 }
+
 @media (max-width:1000px)
 {
-    .searchbar{
-        margin-top: -1.25rem;
-    }
+    
     .details{
         display: block;
     }
