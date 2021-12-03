@@ -15,12 +15,18 @@ const signupRouter = require('./routers/signup');
 const loginRouter = require('./routers/login');
 const accRouter = require('./routers/myAcc');
 const postRouter = require('./routers/post');
+const communityRouter = require('./routers/community')
+const morgan = require('morgan')
+const cors = require('cors')
+
+
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const {isLoggedin} = require('./utilities/middlewares');
 const timeAgo = require('./utilities/timeAgo');
+const router = require("./routers/community");
 
 mongoose.connect(process.env.mongoCloudURL,
     { useNewUrlParser: true,
@@ -46,6 +52,10 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(morgan('dev'));
+//app.use(cors());
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -69,6 +79,7 @@ app.use('/signup',signupRouter);
 app.use('/',loginRouter);
 app.use('/profile',isLoggedin,accRouter);
 app.use('/post',isLoggedin,postRouter);
+app.use('/c',isLoggedin,communityRouter);
 
 
 //home
