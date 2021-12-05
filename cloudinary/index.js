@@ -10,13 +10,6 @@ const storage = new CloudinaryStorage({
     params: {
     folder:'StudentForum',
     allowedFormats: ['jpg','png','jpeg'],
-    transformation: [{
-        width: 300,
-        height: 300,
-        gravity: "faces",
-        crop: "fill"
-
-    }],
     }
 });
 const storage2 = new CloudinaryStorage({

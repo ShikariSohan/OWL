@@ -1,11 +1,13 @@
 <%- include("partial/head") %>
 <%- include("partial/sidebar_left") %>
+<script type="text/javascript" src="/ckeditorBasic/ckeditor.js"></script>
 <div id="bdy">
-    <div class="card mb-4" style="width: 40rem;" >
+
+  <div class="card mb-4 posts  shadow-sm" style="margin: auto; border-radius: 10px;" >
         <div class="card-body">
           <div class="card-title mb-2" style=" border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
-            <h5 class='m-0 p-0'><%=post.title%></h5>
-            <p class="m-0 p-0 pb-2" style="font-size: small;"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+            <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
+            <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
           </div>
           <div class="card-text m-2 p-2">
           <p ><%- post.description %></p>
@@ -34,13 +36,14 @@
        <%}%>
         </div>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
-          <p class="card-text ml-2"><b><%= post.author.name %></b></p>
+          <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
         </a>
           </div>
         </div>
         
       </div>
     <div>
+     
       <p>Add a Comment</p>
       <form action="/post/<%=post._id%>/new/comment" method="POST">
         <div class="form-group">
@@ -54,17 +57,29 @@
 
     <div class="card border-light mb-3" >
       <div class="card-body">
-        <p class="card-text"><%= comment.comment %> </p>
+        <p class="card-text"><%- comment.comment %> </p>
       </div>
       <div class="card-footer">
         <div style="float: right;"><a class="d-flex" href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.image.url %>" class="avatar1" >
-        <p class="card-text ml-2"><b><%= comment.author.name %></b></p></a>
+        <p class="card-text ml-2" style="font-size: smaller;"><b><%= comment.author.name %></b></p></a>
         </div>
       </div>
     </div>
     <% } %> 
     
 </div>
+<script>
+  var editor = CKEDITOR.replace( 'comment');
+   editor.on( 'contentDom', function() {
+    var editable = editor.editable();
+    editable.attachListener( editable, 'click', function( evt ) {
+   var link = new CKEDITOR.dom.elementPath( evt.data.getTarget(), this ).contains( 'a' );
+ if ( link && evt.data.$.button != 2) {
+   window.open( link.getAttribute( 'href' ) );
+ }
+}, null, null, 15 );
+} );
+</script>
 <%- include("partial/sidebar_right") %>
 <%- include("partial/foot") %>
 

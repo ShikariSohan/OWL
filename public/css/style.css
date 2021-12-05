@@ -6,7 +6,7 @@
 }
 body { 
     padding-top: 70px; 
-    background-color: rgba(202, 203, 204, 0.767);
+    background-color: #E5E5E5;
 }
 .navbar{
     padding: 1rem;
@@ -85,7 +85,7 @@ nav{
     height: 100vh;
     z-index:1;
     background:#ECEEF0;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 #bdy{
 position: relative;
@@ -97,7 +97,8 @@ margin-top: auto;
 margin-left: 250px;
 margin-right: auto;
 padding: 50px;
-transition: all 0.3s ease;
+transition: all 0.5s ease;
+
 }
 #myAcc{
     position: relative;
@@ -185,9 +186,7 @@ a[data-toggle="collapse"] {
 
 
 }
-@media (max-width:900px) {
-    
-}
+
 @media (max-width: 768px) {
    
    
@@ -197,6 +196,11 @@ a[data-toggle="collapse"] {
     }
     #bdy{
         margin: auto;
+        width: inherit;
+        
+    }
+    .posts{
+        width: 30px;;
     }
     #sidebar {
         margin-left: -250px;
@@ -206,14 +210,23 @@ a[data-toggle="collapse"] {
     }
    
 }
-
-@media (max-width:1000px)
+@media (max-width:1200px)
 {
-    
     .details{
         display: block;
     }
 
+}
+@media (max-width:1000px)
+{
+    
+    #bdy{
+        margin:auto;
+    }
+    .posts{
+        min-width:40vw;
+        max-width:50vw;
+    }
     .nav-item{
         
         margin-left: 1px;
@@ -234,9 +247,9 @@ padding: 20px;
 height: auto;
 margin-right:30px;
 border-radius: 10px;
-transition: all 0.3s ease;
 top: 70px;
 bottom: 0;
+transition: all 0.5s ease;
 }
 .sec1{
     position: relative;
@@ -263,12 +276,16 @@ bottom: 0;
     border-bottom: rgba(166, 168, 168, 0.788) 1px solid;
 }
 .avatar1{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 .avatar2{
     width: 25px;
     height: 25px;
     border-radius: 50%;
+}
+
+.posts{
+    width: 37.5rem;
 }

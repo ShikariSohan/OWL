@@ -2,6 +2,15 @@
 var ok=false;
 var backarrow = false;
 function responsive(){
+  if($(window).width()<426)
+  {
+    $('.navbar-brand').css('display','none'); 
+  }
+  if($(window).width()>1200)
+{
+    $('#info').addClass('d-block'); 
+}
+
   if($(window).width()<800)
   {
     $('.home').css('display','none');
@@ -35,8 +44,7 @@ function responsive(){
 }
 if($(window).width()>800)
 {
-    $('.searchbar').css('display','block');
-    
+    $('.searchbar').css('display','block'); 
 }
 else{
     $('.searchIcon').css('display','block');
@@ -46,16 +54,6 @@ else{
 
 $(window).resize(responsive);
 
-$('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-    $('.collapse.in').toggleClass('in');
-    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    $('#info').addClass('d-none');
-});
-$('.fa-info').on('click',function(){
-    $('#info').toggleClass('d-none');
-    $('#sidebar').removeClass('active');
-});
 
 
 
@@ -84,4 +82,15 @@ $('.fa-arrow-left').on('click',function(){
 });
 
 
+$('#sidebarCollapse').on('click', function () {
+  $('#sidebar').toggleClass('active');
+  $('.collapse.in').toggleClass('in');
+  $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  $('#info').addClass('d-none');
+});
+$('.fa-info').on('click',function(){
+  $('#info').removeClass('d-block');
+  $('#info').toggleClass('d-none');
+  $('#sidebar').removeClass('active');
+});
 
