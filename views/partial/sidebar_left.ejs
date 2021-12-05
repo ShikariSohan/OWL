@@ -11,7 +11,7 @@
             <a href="#">Join a Community</a>
         </li>
         <li>
-            <a href="#">Create Community</a>
+            <a data-toggle="modal" data-target="#exampleModal" data-whatever="<%=currentUser.name%>"> Create Community</a>
         </li>
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Community</a>
@@ -34,7 +34,7 @@
             <a href="#">Acheveiments</a>
         </li>
         <li>
-            <a href="/profile/<%=currentUser.name%>">My Account</a>
+            <a href="/profile/<%=currentUser._id%>">My Account</a>
         </li>
         <li>
             <a href="#">Settings</a>
