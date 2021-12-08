@@ -42,6 +42,22 @@
          
        <%}%>
         </div>
+        <button class="btn upvote"><img
+          src="/img/upvote.ico"
+          width="16px"
+          alt="cant load"
+          loading="lazy"
+  
+        /></button>
+        
+        <button class="btn upvote"><img
+          src="/img/downvote.ico"
+          style="color: blue;"
+          width="16px"
+          alt="cant load"
+          loading="lazy"
+  
+        /></button>
         <a class="btn btn-outline-info" href="/post/<%=post._id%>" role="button">See The Comments</a>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>

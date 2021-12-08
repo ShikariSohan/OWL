@@ -1,6 +1,10 @@
 
 var ok=false;
 var backarrow = false;
+if($(window).width() < 900){
+  $('#info').removeClass('d-block');
+$('#info').addClass('d-none');
+}
 function responsive(){
   if($(window).width()<426)
   {
@@ -9,6 +13,11 @@ function responsive(){
   if($(window).width()>1200)
 {
     $('#info').addClass('d-block'); 
+}
+else if($(window).width()<900)
+{
+  $('#info').removeClass('d-block'); 
+    $('#info').addClass('d-none'); 
 }
 
   if($(window).width()<800)
@@ -86,7 +95,9 @@ $('#sidebarCollapse').on('click', function () {
   $('#sidebar').toggleClass('active');
   $('.collapse.in').toggleClass('in');
   $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-  $('#info').addClass('d-none');
+    if($(window).width() < 900)
+    $('#info').addClass('d-none');
+  
 });
 $('.fa-info').on('click',function(){
   $('#info').removeClass('d-block');

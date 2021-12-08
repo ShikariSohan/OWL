@@ -190,7 +190,6 @@ a[data-toggle="collapse"] {
 @media (max-width: 768px) {
    
    
-    
     .home{
         display: none;
     }
@@ -236,6 +235,16 @@ a[data-toggle="collapse"] {
     }
     
 }
+.upvote {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+   
+  }
+  
+  /* Darker background on mouse-over */
+  .upvote:hover {
+    background-color: rgb(193, 193, 197);
+  }
 
 #info{
 position: fixed;
