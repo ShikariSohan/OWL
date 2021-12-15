@@ -1,9 +1,8 @@
 var socket = io();
-   // var btn = document.getElementsById( 'upvote-btn' );
     var upvote_val = false;
     var i=0;
     $('.upvote-btn').on('click',function(e){
-      $.post( "http://localhost:2727/login");
+     // $.post( "http://localhost:2727/login");
      i=$(this).index('.upvote-btn')
      const id =$(this).siblings('.card-title').find("a").attr('href').split('/').at(-1);
      // alert(id);

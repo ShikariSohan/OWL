@@ -140,7 +140,7 @@ io.on( 'connection', function( socket ) {
         else if(upvote_count==-1 || PreClicked.types==="upvote"){
             
             if(upvote_count!=-1){
-               // console.log("baaaaaaaaaaaaaaaaaaaaaal")
+              
                 upvote_count=-1
             }
            await User.findByIdAndUpdate({_id: currentUser._id},
