@@ -6,6 +6,7 @@ const multer = require('multer');
 const {storage2} = require('../cloudinary')
 const upload = multer({storage:storage2});
 const timeAgo = require('../utilities/timeAgo');
+const upvoteDownvoteOfPosts = require('../models/upvoteAndDownvoteOfPosts');
 
 //New post area
 router.get('/new', (req, res) => {
@@ -18,7 +19,11 @@ router.post('/new', upload.array('image'), async(req, res) => {
     if(req.files)
         post.image = req.files.map(f => ({url:f.path, filename: f.filename}));
     post.author=req.user._id;
-    await post.save();
+    post.upvotes = 0;
+    post.downvotes = 0;
+    await post.save();  
+    
+    console.log(post);
     res.redirect('/');
     }
     catch(err)

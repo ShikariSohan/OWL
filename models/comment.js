@@ -13,7 +13,7 @@ const CommentSchema = new Schema({
     },
     post:{
         type: Schema.Types.ObjectId,
-        ref:'User',
+        ref:'User', //post ref user? fishy
         autopopulate: true,
         required: true
     },

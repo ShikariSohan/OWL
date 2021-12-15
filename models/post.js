@@ -20,6 +20,14 @@ const PostSchema = new Schema({
             filename:String
         }
     ],
+    upvotes:{
+        type:Number,
+        defafult:0
+    },
+    downvotes:{
+        type:Number,
+        default:0
+    }
        
 },
 {

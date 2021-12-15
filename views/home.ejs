@@ -42,13 +42,15 @@
          
        <%}%>
         </div>
-        <button class="btn upvote"><img
+
+        <button class="btn upvote upvote-btn"><img
           src="/img/upvote.ico"
           width="16px"
           alt="cant load"
           loading="lazy"
   
         /></button>
+        <p class="upvote-count"><%=post.upvotes %> </p>
         
         <button class="btn upvote"><img
           src="/img/downvote.ico"
@@ -58,6 +60,7 @@
           loading="lazy"
   
         /></button>
+        
         <a class="btn btn-outline-info" href="/post/<%=post._id%>" role="button">See The Comments</a>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
@@ -73,6 +76,7 @@
 <%- include("partial/sidebar_right") %>
 <!-- New PopUp Modal For create Community -->
 <%- include("partial/newCommunity") %> 
+<!--upvote and downvote-->
 <%- include("partial/foot") %>
 
 

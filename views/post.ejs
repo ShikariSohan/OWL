@@ -35,6 +35,7 @@
          
        <%}%>
         </div>
+        
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
         </a>
@@ -57,7 +58,9 @@
 
     <div class="card border-light mb-3" >
       <div class="card-body">
-        <p class="card-text"><%- comment.comment %> </p>
+        <div class="card-text">
+        <%- comment.comment %> 
+      </div>
       </div>
       <div class="card-footer">
         <div style="float: right;"><a class="d-flex" href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.image.url %>" class="avatar1" >
@@ -80,6 +83,7 @@
 }, null, null, 15 );
 } );
 </script>
+
 <%- include("partial/sidebar_right") %>
 <%- include("partial/foot") %>
 

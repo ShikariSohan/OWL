@@ -1,8 +1,8 @@
 const  Mongoose  = require('mongoose');
-const schema = Mongoose.Schema;
+const Schema = Mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
-User  =  new schema({
+User  =  new Schema({
     email : {
         type : String,
         required : true,
@@ -25,8 +25,11 @@ User  =  new schema({
     image:{
         url: String,
         filename: String
-    }
-
+    },
+    upvotes_downvotes:[{
+        postId:{ type: Schema.Types.ObjectId , ref:'Post'},
+        types: String
+    }],
 
 });
 User.plugin(passportLocalMongoose, { usernameField : 'email' });
