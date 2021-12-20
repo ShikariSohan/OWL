@@ -20,7 +20,7 @@ const communityRouter = require('./routers/community')
 const morgan = require('morgan')
 const cors = require('cors')
 const http = require( 'http' ).createServer( app )
-const io = require( 'socket.io' )( http )
+const io = require( 'socket.io' )( http ) //for real time updates
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
@@ -96,49 +96,65 @@ const port = process.env.PORT || 2727 ;
 http.listen(port, ()=>{
     console.log(`Listening to the ${port} !!!!!`.brightYellow);
 });
-//for upvote and downvote
-var upvote_count = 0;
-var ok = false;
+
+//broadcasting upvote and downvote to each user 
 io.on( 'connection', function( socket ) {
-    console.log( 'a user has connected!' );
+    console.log( 'a user has connected!' ); // check user is connected
     
     socket.on( 'disconnect', function() {
-        console.log( 'user disconnected' );
+        console.log( 'user disconnected' ); // check user is disconnected
     });
-    
-    socket.on( 'upvote-event', async function( upvote_flag , id) {
-        console.log(typeof id, typeof currentUser._id);  
-        upvote_count = upvote_flag ? 1: -1;
-        const post_Id = new ObjectID(id);
+    //Upvoting section
+    var upvote_count = 0; // to count total upvote
+    // check if upvote button is clicked
+    socket.on( 'upvote-event', async function(id) {
+
+        //console.log(typeof id, typeof currentUser._id);  
+        var ok = false; // set variable to check downvote was previously clicked
+        var upButton = false; // to change the button color
+        const post_Id = new ObjectID(id); // make the post id string to mongoose object id
         //const upvoteDownvote = await upvoteDownvoteOfPosts.findOneAndUpdate({postId: new ObjectID(id)});
-        const bal = await User.findOne({_id: currentUser._id})
-        //console.log(bal);
-        const arr = bal.upvotes_downvotes;
-        console.log(arr);
+        const getUser = await User.findOne({_id: currentUser._id}) // get current user
+      
+        const arr = getUser.upvotes_downvotes; // get the upvotes_downvotes array from current user
+        
        var PreClicked ;
        if(arr !== undefined)
           PreClicked = arr.find(clicked => {
             //console.log(clicked.postId,post_Id)
-            return clicked.postId.equals(post_Id);
+            return clicked.postId.equals(post_Id); // check if upvote button clicked previously
         });
         //var ok = false;
        // console.log(PreClicked, post_Id);
     
-        if(upvote_count==1 && (PreClicked==undefined || arr==undefined))
+        if((PreClicked==undefined || arr==undefined)) // check if upvote button clicked for first time
         {
-            //upvote_count = 1;
+            upButton = true; // change to make clicked button blue
+            upvote_count = 1; // set value to 1
             const newUpvote = { postId: post_Id, types: "upvote" };
             await User.findByIdAndUpdate({_id: currentUser._id},
                 { $push: 
                     { 
-                        upvotes_downvotes: newUpvote
+                        upvotes_downvotes: newUpvote // push to upvotes_downvotes array
                   } ,
                 },
             )
             
         }
-        else if(upvote_count==-1 || PreClicked.types==="upvote"){
-            
+        else if (PreClicked!=undefined && PreClicked.types==="downvote") // if downvote button was previously clicked
+        {
+            upButton = true;
+            upvote_count = 1;
+            ok =true;
+           await User.updateOne({_id: currentUser._id, "upvotes_downvotes.postId": post_Id},
+                   { $set: {
+                        "upvotes_downvotes.$.types": "upvote" // change the button clicked type to "upvote"
+                    }
+                },                      
+            )
+        }
+        else if(PreClicked.types==="upvote"){ //check if upvote button is clicked twice
+            upButton = false; // set upButton false
             if(upvote_count!=-1){
               
                 upvote_count=-1
@@ -146,22 +162,12 @@ io.on( 'connection', function( socket ) {
            await User.findByIdAndUpdate({_id: currentUser._id},
             { $pull:
                  { upvotes_downvotes:{
-                       postId: post_Id, types: "upvote" 
+                       postId: post_Id, types: "upvote" // remove the document
                     }
                  } 
             })
         }
-        else if (PreClicked.types==="downvote")
-        {
-            upvote_count = 1;
-            User.findByIdAndUpdate({_id: currentUser._id},
-                 {"upvotes_downvotes.postId": post_Id},
-                   { $set: {
-                        "upvotes_downvotes.$.types": "upvote"
-                    }
-                },                      
-            )
-        }
+       
         //if(PreClicked.types==="upvote")
        
         //console.log(User.findById({_id: user._id}).upvotes_downvotes);                                                                                                       
@@ -169,7 +175,88 @@ io.on( 'connection', function( socket ) {
             {_id: post_Id},
             {
                 $inc: {
-                upvotes:upvote_count
+                upvotes:upvote_count //update the number of upvotes
+                }
+             },
+             {
+                 new:true
+             });
+            if(ok) // check if downvote button was clicked previously and now upvote button is clicked
+            {
+               upvoteDownvote.downvotes = upvoteDownvote.downvotes-1; //decrement downvote nuber
+               await upvoteDownvote.save(); //save the document
+            }
+        
+       //update result on client side
+        io.emit( 'update-upvotes', upvoteDownvote.upvotes,upvoteDownvote.downvotes,upButton);
+    }); // upvote section end
+
+    //downvotes section
+    var downvote_count = 0; // to count total downvote
+    // check if downvote button is clicked
+    socket.on( 'downvote-event', async function( id) {
+        var ok = false;// set variable to check upvote was previously clicked
+        var downButton = false;// to change the button color  
+        const post_Id = new ObjectID(id); // make the post id string to mongoose object id
+        const getUser = await User.findOne({_id: currentUser._id}) //find current user continously
+        const arr = getUser.upvotes_downvotes;
+       var PreClicked ;
+       if(arr !== undefined)
+          PreClicked = arr.find(clicked => { //check if downvote button was clicked previously
+            //console.log(clicked.postId,post_Id)
+            return clicked.postId.equals(post_Id);
+        });
+       
+        if( (PreClicked==undefined || arr==undefined)) //if post id does not exist in user array
+        {
+            downButton = true
+            downvote_count=1; //update downvote
+            const newDownvote = { postId: post_Id, types: "downvote" };
+            await User.findByIdAndUpdate({_id: currentUser._id},
+                { $push: 
+                    { 
+                        upvotes_downvotes: newDownvote // push new downvote
+                  } ,
+                },
+            )
+            
+        }
+        else if (PreClicked!=undefined && PreClicked.types==="upvote") // if upvote was clicked previously
+        {
+            downButton = true;
+            downvote_count = 1;
+            ok = true;
+           await User.updateOne({_id: currentUser._id, 'upvotes_downvotes.postId' : post_Id},
+                   { $set: {
+                        "upvotes_downvotes.$.types": "downvote" //update the type
+                    }
+                },                      
+            )
+        }
+        else if(PreClicked.types==="downvote"){ // if downvote button is clicked twice
+            downButton = false
+            
+            if(downvote_count!=-1){
+              
+                downvote_count=-1
+            }
+           await User.findByIdAndUpdate({_id: currentUser._id},
+            { $pull:
+                 { upvotes_downvotes:{
+                       postId: post_Id, types: "downvote" // remove the document
+                    }
+                 } 
+            })
+        }
+       
+        //if(PreClicked.types==="upvote")
+       
+        //console.log(User.findById({_id: user._id}).upvotes_downvotes);                                                                                                       
+        const upvoteDownvote = await Post.findByIdAndUpdate(
+            {_id: post_Id},
+            {
+                $inc: {
+                downvotes:downvote_count // update downvotes
                 }
              },
              {
@@ -177,7 +264,12 @@ io.on( 'connection', function( socket ) {
              });
         
        // console.log(upvoteDownvote);
-        io.emit( 'update-upvotes', upvoteDownvote.upvotes);
+       if(ok)
+       {
+        upvoteDownvote.upvotes-=1; //decrement if upvote button was clicked previously 
+        await upvoteDownvote.save(); //save the user document
+       }
+        io.emit( 'update-downvotes', upvoteDownvote.upvotes,upvoteDownvote.downvotes,downButton);
     });
 });
     

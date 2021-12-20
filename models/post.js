@@ -27,8 +27,11 @@ const PostSchema = new Schema({
     downvotes:{
         type:Number,
         default:0
-    }
-       
+    },
+    comments:{
+        type:Number,
+        default:0
+    } ,  
 },
 {
     timestamps: true
