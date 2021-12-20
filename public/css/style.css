@@ -170,7 +170,9 @@ a[data-toggle="collapse"] {
         
         margin-top: -1.10rem;
     } 
-    
+    .upvote{
+        font-size: 20px;
+    }
 
     #sidebarCollapse,.navbar-brand{
         margin-top: -2.50rem;  
@@ -236,16 +238,29 @@ a[data-toggle="collapse"] {
     }
     
 }
-.upvote {
-    background-color: rgb(255, 255, 255);
-    border-radius: 50%;
-   
-  }
+
   
-  /* Darker background on mouse-over */
-  .upvote:hover {
-    background-color: rgb(193, 193, 197);
+  .downvote-btn{
+    background: url('/img/downvote.png') no-repeat 2px -27px;
+    cursor: pointer;
+    
   }
+  .upvote-btn{
+    background: url('/img/upvote.png') no-repeat 2px -27px;
+    cursor: pointer;
+    
+}
+
+  .upvote
+      {
+        width: 16px;
+        border-radius: 50%;
+  }
+  .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  /*2px 4px*/
 
 #info{
 position: fixed;

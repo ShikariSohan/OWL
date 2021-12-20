@@ -21,6 +21,7 @@ router.post('/new', upload.array('image'), async(req, res) => {
     post.author=req.user._id;
     post.upvotes = 0;
     post.downvotes = 0;
+    post.comments = 0;
     await post.save();  
     
     console.log(post);
@@ -42,6 +43,13 @@ router.post('/:id/new/comment',async(req,res)=>{
         }
         const newComment = new Comment(comment);
         await newComment.save();
+        await Post.findByIdAndUpdate(
+            {_id: req.params.id},
+            {
+                $inc: {
+                comments:1
+                }
+             });
         const url = '/post/'+ req.params.id;
         res.redirect(url);
     }

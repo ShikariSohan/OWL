@@ -4,10 +4,16 @@
 <div id="bdy">
 
   <div class="card mb-4 posts  shadow-sm" style="margin: auto; border-radius: 10px;" >
-        <div class="card-body">
+        <div class="card-body  mb-0 pb-0">
           <div class="card-title mb-2" style=" border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
-            <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
+            <div class="m-0 p-0">
+            <a href="/post/<%=post._id%>" class='m-0 p-0 ' style="color: black; display: inline-block;">
+              <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
+            </a>
+            <i class="fa fa-edit" aria-hidden="true" style=" float:right;"></i>
+          </div>
             <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+          
           </div>
           <div class="card-text m-2 p-2">
           <p ><%- post.description %></p>
@@ -35,10 +41,32 @@
          
        <%}%>
         </div>
-        
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+          <button class="btn upvote upvote-btn"><img
+            src="/img/downvote.ico"
+            width="1" height="1"
+            alt="cant load"
+            loading="lazy"
+    
+          /></button>
+        <p class="upvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.upvotes %> </p>
+        <button class="btn upvote downvote-btn"><img
+          src="/img/downvote.ico"
+          width="1" height="1"
+          alt="cant load"
+          loading="lazy"
+  
+        /></button>
+        <p class="downvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.downvotes %> </p>
+      </div>
+      <a href="/post/<%=post._id%>" style="font-size: 14px; color: rgb(110, 105, 105);" class="m-2">
+        <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
+      </a>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.image.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
         </a>
+        </div>
           </div>
         </div>
         
