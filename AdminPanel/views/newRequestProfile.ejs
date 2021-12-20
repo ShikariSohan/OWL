@@ -1,0 +1,26 @@
+<%- include("partial/head") %>
+<%- include("partial/navbar") %>
+<%- include("partial/sidebar_left") %>
+<div class="card p-4 w-50 m-auto">
+    <h1 class="display-4">Review Profile</h1>
+    <div class="card m-1">
+      <div class="card-body">
+          <h4>Name: <%= newUser.name %></h4>
+          <h5>Email: <%= newUser.email %></h5>
+          <h5>Reg: <%= newUser.reg %></h5>
+          <h5>Department: <%= newUser.department %></h5>
+          <h5>ID check : </h5>
+          <a href=<%= newUser.image.url %> target="_blank">
+            <img src=<%= newUser.image.url %>  class="img-fluid" alt="Responsive image">  
+          </a>    
+      </div>
+    </div>
+    <form action="/approve/<%= newUser._id %>" method="POST" novalidate>
+      <button type="submit" class="btn btn-success m-1">Approve</button>
+    </form>
+    <form action="/reject/<%= newUser._id %>" method="POST" novalidate>
+      <button type="submit" class="btn btn-danger m-1">Reject</button>
+    </form>
+      
+</div>
+<%- include("partial/foot") %>

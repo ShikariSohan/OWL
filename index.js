@@ -21,15 +21,14 @@ const morgan = require('morgan')
 const cors = require('cors')
 const http = require( 'http' ).createServer( app )
 const io = require( 'socket.io' )( http )
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const Post = require('./models/post');
 const {isLoggedin} = require('./utilities/middlewares');
 const timeAgo = require('./utilities/timeAgo');
 const router = require("./routers/community");
+const cookieParser = require('cookie-parser');
 
-mongoose.connect(process.env.mongoCloudURL,
+mongoose.connect(process.env.mongoURL,
     { useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
@@ -52,6 +51,7 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(cookieParser(process.env.cookieString));
 
 app.use(morgan('dev'));
 //app.use(cors());
@@ -63,15 +63,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine","ejs");
 app.set('views', path.join(__dirname, '/views'));
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new LocalStrategy( { usernameField : 'email' },User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 app.use((req,res,next)=>{
-    res.locals.currentUser = req.user;
     res.locals.error = req.flash('error');
     next();
 });
@@ -85,7 +77,7 @@ app.use('/c',isLoggedin,communityRouter);
 
 //home
 var currentUser;
-app.get('/', isLoggedin,async(req, res) => {
+app.get('/',isLoggedin,async(req, res) => {
     currentUser = req.user;
     const posts =  await Post.find({}).sort('-createdAt');      
     res.render("home",{posts,timeAgo});

@@ -1,0 +1,21 @@
+<%- include("partial/head") %>
+<%- include("partial/navbar") %>
+<%- include("partial/sidebar_left") %>
+<div class="card p-4 w-50 m-auto">
+    
+    <% if (newUsers.length>=1) {%> 
+      <h1 class="display-4">New Requests For Review - </h1>
+  <% for(let newUser of newUsers){ %> 
+  <div class="card m-1">
+    <div class="card-body">
+      <h4>Name: <%= newUser.name %> </h4>
+      <a href="/newrequest/<%= newUser._id %>" class="btn btn-warning">Review Profile</a>
+    </div>
+  </div>
+  <% } %> 
+  <% } else { %> 
+    <h1 class="display-4"> No new Requests </h1>
+    <% } %> 
+  
+</div>
+<%- include("partial/foot") %>

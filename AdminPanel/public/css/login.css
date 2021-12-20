@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+    background: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.image {
+    max-width: calc((100% - 650px) + 200px);
+}
+
+.login_wrapper {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding: 60px 35px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px 1px rgb(76, 132, 209);
+}
+
+.login_wrapper .title {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(34, 42, 53);
+}
+
+.login_wrapper .form .input_field {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.login_wrapper .form .input_field .input {
+    width: 100%;
+    padding: 18px 40px;
+    border: none;
+    background: #eeeeee;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.login_wrapper .form .btn {
+    width: 70%;
+    margin: 20px auto 0;
+    background: rgb(76, 132, 209);
+    text-align: center;
+    padding: 12px;
+    border-radius: 25px;
+}
+
+.login_wrapper .form .btn:hover {
+    background: rgb(76, 132, 209);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4a00e0, #8e2de2);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4a00e0, #8e2de2);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.login_wrapper .form .btn button {
+    color: #fff;
+}
+
+.login_wrapper .form .input_field i {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    font-size: 18px;
+    color: #1d2120;
+    opacity: 0.8;
+}
+
+select {
+    width: 100%;
+    padding: 10px 32px;
+    border: none;
+    background: #eeeeee;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.file {
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    background: #eeeeee;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+.file .file_label {
+    margin-right: 1rem;
+}
+
+.file input {
+    font-size: 15px;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #1d2120;
+    opacity: 0.8;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #1d2120;
+}

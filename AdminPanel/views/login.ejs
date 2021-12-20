@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+   
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+    <title>Admin Owl</title>
+</head>
+<body>
+<div class="container">
+    
+    <div class="image" style="height: 100vh ; overflow: hidden">
+      <svg
+        viewBox="0 0 500 150"
+        preserveAspectRatio="none"
+        style=" height: 100% ; width: 100% "
+      >
+        <path
+          d="M-31.88,-64.63 C61.23,64.63 -74.21,110.03 261.57,197.86 L6.49,397.20 L-7.05,168.25 Z"
+          style=" stroke: none; fill: rgb(76, 132, 209) "
+        ></path>
+      </svg>
+    </div>
+    <div class="login_wrapper">
+      <div class="title">Login Here</div>
+      <%- include ('./partial/flash') %>
+      <form action="/login" method="POST" novalidate>
+      <div class="form">
+        <div class="input_field">
+          <input name="email" type="email" placeholder="email" class="input" />
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="input_field">
+          <input name="password" type="password" placeholder="password" class="input" />
+          <i class="fas fa-unlock-alt"></i>
+        </div>
+        <button type="submit" class="btn">Login</button>
+         
+        
+      </div>
+    </form>
+    </div>
+</div>
+<%- include("partial/foot") %>
