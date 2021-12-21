@@ -10,13 +10,13 @@ const storage = new CloudinaryStorage({
     params: {
     folder:'StudentForum',
     allowedFormats: ['jpg','png','jpeg','ico'],
-    transformation: [{
-        width: 300,
-        height: 300,
-        gravity: "faces",
-        crop: "fill"
+    // transformation: [{
+    //     width: 300,
+    //     height: 300,
+    //     gravity: "faces",
+    //     crop: "fill"
 
-    }],
+    // }],
     }
 });
 const storage2 = new CloudinaryStorage({
@@ -24,12 +24,19 @@ const storage2 = new CloudinaryStorage({
     params: {
     folder:'StudentForumPosts',
     allowedFormats: ['jpg','png','jpeg'],
-   
+    }
+});
+const IDstorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+    folder:'StudentIDS',
+    allowedFormats: ['jpg','png','jpeg'],
     }
 });
 
 module.exports = {
     cloudinary,
     storage,
-    storage2
+    storage2,
+    IDstorage
 }

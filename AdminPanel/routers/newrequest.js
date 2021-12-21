@@ -1,6 +1,7 @@
 const express = require('express');
 const { isLoggedin,tempPassword } = require('../utils/common');
 const { mailSender } = require('../utils/mail');
+const { passwordTemplate } = require('../utils/mailTemplate');
 const router =  express.Router();
 const User = require('../models/user');
 router.use(isLoggedin);
@@ -39,7 +40,7 @@ router.post('/approve/:id',async(req,res)=>{
                     isVerified:true,
                     password:hashedPassword,
                     avatar:{
-                        url:"https://res.cloudinary.com/kongkacloud/image/upload/v1639943358/StudentForum/qffsqikrzgwznfe5pmhy.jpg",
+                        url:"https://res.cloudinary.com/kongkacloud/image/upload/v1640077406/Pngtree_cartoon_owl_teacher_1045061_vzyilt.png",
                         filename:"userDefaultAvatar"
                     }
                 }
@@ -49,7 +50,7 @@ router.post('/approve/:id',async(req,res)=>{
         const mailResult = await mailSender(
             result.email,
             "You account is Verified",
-            `<h1>Your password is :${password}</h1>`
+            passwordTemplate(password)
         );
         res.redirect("/newrequest");
     }
