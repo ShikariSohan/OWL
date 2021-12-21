@@ -76,7 +76,7 @@ app.use('/c',isLoggedin,communityRouter);
 
 
 //home
-var currentUser;
+let currentUser;
 app.get('/',isLoggedin,async(req, res) => {
     currentUser = req.user;
     const posts =  await Post.find({}).sort('-createdAt');      
@@ -97,20 +97,20 @@ io.on( 'connection', function( socket ) {
         console.log( 'user disconnected' ); // check user is disconnected
     });
     //Upvoting section
-    var upvote_count = 0; // to count total upvote
+   let upvote_count = 0; // to count total upvote
     // check if upvote button is clicked
     socket.on( 'upvote-event', async function(id) {
 
         //console.log(typeof id, typeof currentUser._id);  
-        var ok = false; // set variable to check downvote was previously clicked
-        var upButton = false; // to change the button color
+        let ok = false; // set variable to check downvote was previously clicked
+        let upButton = false; // to change the button color
         const post_Id = new ObjectID(id); // make the post id string to mongoose object id
         //const upvoteDownvote = await upvoteDownvoteOfPosts.findOneAndUpdate({postId: new ObjectID(id)});
         const getUser = await User.findOne({_id: currentUser._id}) // get current user
       
         const arr = getUser.upvotes_downvotes; // get the upvotes_downvotes array from current user
         
-       var PreClicked ;
+       let PreClicked ;
        if(arr !== undefined)
           PreClicked = arr.find(clicked => {
             //console.log(clicked.postId,post_Id)
@@ -184,15 +184,15 @@ io.on( 'connection', function( socket ) {
     }); // upvote section end
 
     //downvotes section
-    var downvote_count = 0; // to count total downvote
+    let downvote_count = 0; // to count total downvote
     // check if downvote button is clicked
     socket.on( 'downvote-event', async function( id) {
-        var ok = false;// set variable to check upvote was previously clicked
-        var downButton = false;// to change the button color  
+        let ok = false;// set variable to check upvote was previously clicked
+        let downButton = false;// to change the button color  
         const post_Id = new ObjectID(id); // make the post id string to mongoose object id
         const getUser = await User.findOne({_id: currentUser._id}) //find current user continously
         const arr = getUser.upvotes_downvotes;
-       var PreClicked ;
+       let PreClicked ;
        if(arr !== undefined)
           PreClicked = arr.find(clicked => { //check if downvote button was clicked previously
             //console.log(clicked.postId,post_Id)

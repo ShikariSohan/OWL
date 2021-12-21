@@ -99,6 +99,8 @@
     <% } %> 
     
 </div>
+<%- include("partial/sidebar_right") %>
+<%- include("partial/scripts") %>
 <script>
   var editor = CKEDITOR.replace( 'comment');
    editor.on( 'contentDom', function() {
@@ -112,7 +114,6 @@
 } );
 </script>
 
-<%- include("partial/sidebar_right") %>
 <%- include("partial/foot") %>
 
   
