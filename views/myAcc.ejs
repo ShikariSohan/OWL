@@ -13,7 +13,7 @@
           <img src="<%=user.avatar.url %>" class="avatar img-fluid" id="dp">
        
         
-        <p class="m-auto p-4"><i><a href="https://www.youtube.com/watch?v=y9Trdafp83U">you tell me?</a></i></p>
+        <p class="m-auto p-4"><i><a href="https://www.youtube.com/watch?v=y9Trdafp83U">Current student of SUST</a></i></p>
         <div class="card-body">
           <h2 class="card-title"> <%=user.name %></h2>
           <p class="card-title"><b>Email: </b><%=user.email %></p>
@@ -22,7 +22,11 @@
             <input type="password" name="password" id="pass" onfocus="appearSubmit(event)"> </p>
           </form>
           <% } else{%>
-            
+            <img src="<%=user.avatar.url %>" class="avatar img-fluid" id="dp">
+            <p class="m-auto p-4"><i><a href="https://www.youtube.com/watch?v=y9Trdafp83U">you tell me?</a></i></p>
+            <div class="card-body">
+          <h2 class="card-title"> <%=user.name %></h2>
+          <p class="card-title"><b>Email: </b><%=user.email %></p>
             <%}%>
           <p class="card-title"><b>Department: </b><%=user.department%></p>  
           <p class="card-title"><b>Registration: </b><%=user.reg%></p>  
