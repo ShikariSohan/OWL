@@ -250,8 +250,15 @@ a[data-toggle="collapse"] {
     cursor: pointer;
     
 }
-
-  .upvote
+.clicked{
+    background: url('/img/upvote.png') no-repeat 2px 4px;
+    cursor: pointer;
+}
+.clicked-downvote{
+    background: url('/img/downvote.png') no-repeat 2px 4px;
+    cursor: pointer;
+}
+.upvote
       {
         width: 16px;
         border-radius: 50%;
@@ -314,3 +321,15 @@ transition: all 0.5s ease;
 .posts{
     width: 37.5rem;
 }
+.collapsed{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card {
+    overflow: hidden;
+}
+.card-body {
+    word-wrap: break-word;
+  }

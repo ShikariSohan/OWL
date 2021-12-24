@@ -1,6 +1,7 @@
 const express = require('express');
 const router =  express.Router();
 const Post = require('../models/post');
+const User = require('../models/user');
 const Comment = require('../models/comment');
 const multer = require('multer');
 const {storage2} = require('../cloudinary')
@@ -63,9 +64,11 @@ router.post('/:id/new/comment',async(req,res)=>{
 //Post area
 router.get('/:id', async(req, res) => {
     try{
+        currentuser = req.user;
+        const getUser = await User.findOne({_id: currentuser._id})
         const post =  await Post.findOne({ _id: req.params.id});
         const comments = await Comment.find({post: req.params.id}).sort('-updatedAt');
-        res.render("post",{post,timeAgo,comments});
+        res.render("post",{post,getUser,timeAgo,comments});
     }
     catch(err){
         console.log(err);

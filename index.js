@@ -76,11 +76,12 @@ app.use('/c',isLoggedin,communityRouter);
 
 
 //home
-let currentUser;
+let currentuser;
 app.get('/',isLoggedin,async(req, res) => {
-    currentUser = req.user;
-    const posts =  await Post.find({}).sort('-createdAt');      
-    res.render("home",{posts,timeAgo});
+    currentuser = req.user;
+    const posts =  await Post.find({}).sort('-createdAt');   
+    const getUser = await User.findOne({_id: currentuser._id}) 
+    res.render("home",{posts,timeAgo,getUser});
 });
 //home end
 
@@ -106,7 +107,7 @@ io.on( 'connection', function( socket ) {
         let upButton = false; // to change the button color
         const post_Id = new ObjectID(id); // make the post id string to mongoose object id
         //const upvoteDownvote = await upvoteDownvoteOfPosts.findOneAndUpdate({postId: new ObjectID(id)});
-        const getUser = await User.findOne({_id: currentUser._id}) // get current user
+        const getUser = await User.findOne({_id: currentuser._id}) // get current user
       
         const arr = getUser.upvotes_downvotes; // get the upvotes_downvotes array from current user
         
@@ -124,7 +125,7 @@ io.on( 'connection', function( socket ) {
             upButton = true; // change to make clicked button blue
             upvote_count = 1; // set value to 1
             const newUpvote = { postId: post_Id, types: "upvote" };
-            await User.findByIdAndUpdate({_id: currentUser._id},
+            await User.findByIdAndUpdate({_id: currentuser._id},
                 { $push: 
                     { 
                         upvotes_downvotes: newUpvote // push to upvotes_downvotes array
@@ -138,7 +139,7 @@ io.on( 'connection', function( socket ) {
             upButton = true;
             upvote_count = 1;
             ok =true;
-           await User.updateOne({_id: currentUser._id, "upvotes_downvotes.postId": post_Id},
+           await User.updateOne({_id: currentuser._id, "upvotes_downvotes.postId": post_Id},
                    { $set: {
                         "upvotes_downvotes.$.types": "upvote" // change the button clicked type to "upvote"
                     }
@@ -151,7 +152,7 @@ io.on( 'connection', function( socket ) {
               
                 upvote_count=-1
             }
-           await User.findByIdAndUpdate({_id: currentUser._id},
+           await User.findByIdAndUpdate({_id: currentuser._id},
             { $pull:
                  { upvotes_downvotes:{
                        postId: post_Id, types: "upvote" // remove the document
@@ -190,7 +191,7 @@ io.on( 'connection', function( socket ) {
         let ok = false;// set variable to check upvote was previously clicked
         let downButton = false;// to change the button color  
         const post_Id = new ObjectID(id); // make the post id string to mongoose object id
-        const getUser = await User.findOne({_id: currentUser._id}) //find current user continously
+        const getUser = await User.findOne({_id: currentuser._id}) //find current user continously
         const arr = getUser.upvotes_downvotes;
        let PreClicked ;
        if(arr !== undefined)
@@ -204,7 +205,7 @@ io.on( 'connection', function( socket ) {
             downButton = true
             downvote_count=1; //update downvote
             const newDownvote = { postId: post_Id, types: "downvote" };
-            await User.findByIdAndUpdate({_id: currentUser._id},
+            await User.findByIdAndUpdate({_id: currentuser._id},
                 { $push: 
                     { 
                         upvotes_downvotes: newDownvote // push new downvote
@@ -218,7 +219,7 @@ io.on( 'connection', function( socket ) {
             downButton = true;
             downvote_count = 1;
             ok = true;
-           await User.updateOne({_id: currentUser._id, 'upvotes_downvotes.postId' : post_Id},
+           await User.updateOne({_id: currentuser._id, 'upvotes_downvotes.postId' : post_Id},
                    { $set: {
                         "upvotes_downvotes.$.types": "downvote" //update the type
                     }
@@ -232,7 +233,7 @@ io.on( 'connection', function( socket ) {
               
                 downvote_count=-1
             }
-           await User.findByIdAndUpdate({_id: currentUser._id},
+           await User.findByIdAndUpdate({_id: currentuser._id},
             { $pull:
                  { upvotes_downvotes:{
                        postId: post_Id, types: "downvote" // remove the document
