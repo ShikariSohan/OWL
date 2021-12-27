@@ -6,35 +6,60 @@
     <div class="card mb-4 posts shadow-sm" style="margin: auto; border-radius: 10px;" >
         <div class="card-body mb-0 pb-0">
           <div class="card-title mb-2" style="border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
+            <div class="dropdown dropleft ml-4 "  style=" float:right;">
+              <a href="#" type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+              <% if(currentUser._id.str === post.author._id.str) {%> 
+              <form action="/" method="POST">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-item" ><i class="far fa-bookmark"></i> Save Post</div>
+              </form>
+                
+                <a class="dropdown-item" href="#">Edit Post</a>
+                <a class="dropdown-item" href="#">Delete Post</a>
+                <% } else{%> 
+                
+                <%}%>
+      
+              </div>
+            </div>
             
-            <div class="m-0 p-0" style="word-wrap: break-word;">
-              <a href="/post/<%=post._id%>" class='m-0 p-0 ' style="color: black; display: inline-block;">
+            <div class="m-0 p-0 postid">
+              <a href="/post/<%=post._id%>" class=' m-0 p-0 ' style="color: black;">
                 <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
               </a>
-        
-              <i class="fa fa-edit" aria-hidden="true" style=" float:right;"></i>
+              
+              
             </div>
             <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
           </div>
           <div class="card-text m-2 p-2">
-            <div class="collapsed">
-          <p ><%- post.description %></p>
-        </div>
+            <div class="collapsed m-0 p-0">
+            <p><%- post.description %></p> 
+          </div> 
+          <% if(post.description.length>212 || post.description.split(/\r\n|\r|\n/).length>3){ %>
+          <p class="see-more">
+          <b style="color: #2EBBF8">See More</b></p>
+          <%}%>
           <% if(post.image.length>0){%>
-            <div id="carouselPosts" class="carousel slide" data-ride="carousel">
+            <div id="<%=post._id%>" class="carousel slide" style="margin-left: -36px;margin-right: -36px;" data-ride="carousel">
               <div class="carousel-inner">
             <% post.image.forEach((img,i) => {%>
-              <div class="carousel-item <%= i===0?'active':'' %> ">
-                <img src="<%=img.url%> " class="d-block w-100" alt="...">
+              <div class="carousel-item <%= i===0?'active':'' %> text-center">
+                
+                  <a href="<%=img.url%>" class="m-auto"><img  src="<%=img.url%>" class="post-img" alt="..."></a>
+              
+ 
               </div>
             <%})%>
         </div>
         <%   if(post.image.length>1) {%>
-        <a class="carousel-control-prev" href="#carouselPosts" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#<%=post._id%>" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselPosts" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#<%=post._id%>" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -81,8 +106,41 @@
           /></button>
           <%}%>
         <p class="downvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.downvotes %> </p>
+        <!-- Button trigger modal -->
+        <button class="btn report-btn" style="background-color: rgba(110, 105, 105, 0);" data-toggle="modal" data-target="#modalContactForm">
+        <i class="fa fa-flag-o report" ></i>
+      </button>
+      <!----------modal----------->
+      <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Report Issue</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-        <a href="/post/<%=post._id%>" style="font-size: 14px; color: rgb(110, 105, 105);" class="m-2">
+      <div class="modal-body mx-3">
+      
+        <div class="md-form">
+          <i class="fas fa-pencil prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="report">Why are you reporting this post?</label>
+          <textarea type="text" id="report" name="report" class="md-textarea form-control m-0" rows="4" placeholder="Write an issue. Ex: Violence, Spam, Harrassment, False Information..."></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-danger">Report<i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------modal End--------->
+
+      </div>
+       
+        <a href="/post/<%=post._id%>" style="font-size: 14px; color: #9A9A9A" class="m-2">
           <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
         </a>
           <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
@@ -101,21 +159,6 @@
 <!-- New PopUp Modal For create Community -->
 <%- include("partial/newCommunity") %> 
 <%- include("partial/scripts") %>
-
-<script>
- function clicked(id){
-   if(currentUser.upvotes_downvotes===undefined)
-       return -1;
-   PreClicked = arr.find(clicked => {
-        return clicked.postId.equals(id);})
-   if(PreClicked === undefined)
-    return 0;
-   else if(PreClicked.type === "upvote")
-     return 1;
-   else if(PreClicked.type === "downvote")
-     return 2;
-     }
-  </script>
 <%- include("partial/foot") %>
 
 

@@ -5,7 +5,7 @@ var socket = io(); //exposes an io global which is used by a particular client.
      // $.post( "http://localhost:2727/login");
      i=$(this).index('.upvote-btn')
      upvote_val = upvote_val ? false: true;
-    const id =$(this).parent().parent().siblings('.card-title').find("a").attr('href').split('/').at(-1);
+    const id =$(this).parent().parent().siblings('.card-title').find(".postid a").attr('href').split('/').at(-1);
       e.preventDefault();   // prevent page reloading
      
       socket.emit( 'upvote-event',id ); //send the post id to server side by emitting

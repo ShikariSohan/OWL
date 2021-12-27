@@ -1,4 +1,5 @@
 
+ 
 var ok=false;
 var backarrow = false;
 if($(window).width() < 900){
@@ -105,3 +106,7 @@ $('.fa-info').on('click',function(){
   $('#sidebar').removeClass('active');
 });
 
+$('.see-more').on('click',function(){
+ $(this).siblings().removeClass('collapsed');
+ $(this).remove();
+})

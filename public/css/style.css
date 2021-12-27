@@ -191,6 +191,11 @@ a[data-toggle="collapse"] {
 }
 
 @media (max-width: 768px) {
+    .post-img{
+    width:100%; 
+    object-fit: contain;
+    height: 400px;
+}
    
    
     .home{
@@ -258,10 +263,32 @@ a[data-toggle="collapse"] {
     background: url('/img/downvote.png') no-repeat 2px 4px;
     cursor: pointer;
 }
+.see-more{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    border: none;
+    background-color:inherit;
+    cursor:pointer;
+}
+.see-more:hover{
+    text-decoration: underline;
+    text-decoration-color:#2EBBF8 ;
+}
 .upvote
       {
+        
         width: 16px;
         border-radius: 50%;
+  }
+  .report{
+    font: size 14px;
+    cursor: pointer; 
+    color: #9A9A9A;
+    transition: all 0.5s ease;
+  }
+  .report:hover{
+    color: #201f1f;
   }
   .btn:focus {
     outline: none;
@@ -327,9 +354,52 @@ transition: all 0.5s ease;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-.card {
-    overflow: hidden;
+
+
+.carousel-control-next,
+.carousel-control-prev{
+    font-size: 100px;
+    border-color: rgb(87, 85, 85);
+    margin-left: 20px;
+    margin-right: 20px;
+    top: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: rgba(75, 74, 74, 0.671);
+    border-radius: 50%;
+    box-shadow: rgb(15, 15, 15);
+   
+    
 }
-.card-body {
-    word-wrap: break-word;
-  }
+
+.post-img{
+    width:100%; 
+    object-fit: contain;
+    height: 400px;
+}
+/*dropdown */
+.dropdown-toggle::after {
+    display: none;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+.dropdown-item:focus{
+    background-color: darkgrey;
+}
+/* dropdown End*/
+/*modal*/
+.close:focus{
+outline: none;
+}
+.md-textarea{
+    resize: none;
+}
+.md-textarea:focus{
+    
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+     /*remove the resize handle on the bottom right*/
+}
