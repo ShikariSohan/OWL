@@ -84,6 +84,37 @@
           /></button>
           <%}%>
         <p class="downvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.downvotes %> </p>
+       <!-- Button trigger modal -->
+       <button class="btn report-btn" style="background-color: rgba(110, 105, 105, 0);" data-toggle="modal" data-target="#modalContactForm">
+        <i class="fa fa-flag-o report" ></i>
+      </button>
+      <!----------modal----------->
+      <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Report Issue</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+      
+        <div class="md-form">
+          <i class="fas fa-pencil prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="report">Why are you reporting this post?</label>
+          <textarea type="text" id="report" name="report" class="md-textarea form-control m-0" rows="4" placeholder="Write an issue. Ex: Violence, Spam, Harrassment, False Information..."></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-danger">Report<i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------modal End--------->
       </div>
       <a href="/post/<%=post._id%>" style="font-size: 14px; color: rgb(110, 105, 105);" class="m-2">
         <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
