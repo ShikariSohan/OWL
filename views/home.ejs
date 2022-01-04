@@ -6,33 +6,48 @@
     <div class="card mb-4 posts shadow-sm" style="margin: auto; border-radius: 10px;" >
         <div class="card-body mb-0 pb-0">
           <div class="card-title mb-2" style="border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
+            <% if(currentUser._id === post.author._id) {%> 
             <div class="dropdown dropleft ml-4 "  style=" float:right;">
-              <a href="#" type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="#" type="text" id="save-edit-del" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
               </a>
-              <% if(currentUser._id.str === post.author._id.str) {%> 
-              <form action="/" method="POST">
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <div class="dropdown-item" ><i class="far fa-bookmark"></i> Save Post</div>
+            
+             
+              <div class="dropdown-menu" aria-labelledby="save-edit-del">
+                <form action="/post/<%=post._id%>/save" method="POST">
+                <button type="submit" class="drpdn-btn" style="padding: 0;border: none; background: none;width: 100%;">
+                  <div class="dropdown-item" ><i class="far fa-bookmark"></i> Save Post</div>
+                </button>
               </form>
+              <a href="/post/<%=post._id%>/edit" >
+                <button class="drpdn-btn" style="padding: 0;border: none; background: none;width: 100%;">
+                  <div class="dropdown-item" ><i class="fa fa-pencil"></i> Edit Post</div>
+                </button>
+              </form>
+              </a>
+              <form action="/post/<%=post._id%>?_method=DELETE" method="POST">
+                <button type="submit" class="drpdn-btn" style="padding: 0;border: none; background: none;width: 100%;">
+                  <div class="dropdown-item" ><i class="far fa-trash-alt"></i> Delete</div>
+                </button>
+                </form>
                 
-                <a class="dropdown-item" href="#">Edit Post</a>
-                <a class="dropdown-item" href="#">Delete Post</a>
-                <% } else{%> 
-                
-                <%}%>
-      
               </div>
             </div>
+            <% } else{%> 
+              <form action="/post/<%=post._id%>/save" method="POST">
+                <button type="submit" class="drpdn-btn" style="padding: 0; margin:0;border: none; background: none;width: 100%;float:right">
+                 <i class="far fa-bookmark" style="font-size:14px;float:right;color: gray;cursor: pointer;"></i>
+                </button>
+              </form>
+            <%}%>
+  
             
             <div class="m-0 p-0 postid">
               <a href="/post/<%=post._id%>" class=' m-0 p-0 ' style="color: black;">
                 <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
               </a>
-              
-              
             </div>
-            <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+            <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106); " data-toggle="tooltip"  title="<%= new Date(post.createdAt).toString()%>"><%=timeAgo.format((post.createdAt.getTime()))%></p>
           </div>
           <div class="card-text m-2 p-2">
             <div class="collapsed m-0 p-0">

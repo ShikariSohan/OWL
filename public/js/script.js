@@ -1,5 +1,24 @@
+$(document).ready(function(){
+  $(".crtGrp")
+       .on('mouseover',function() {
+         $(".crtGrp img").attr("src","/img/grp hover.png");
+       })
+       .on('mouseout', function() {
+        $(".crtGrp img").attr('src', "/img/grp.png");
+    });
+  $(".joinGrp")
+  .on('mouseover',function()
+   {$(".joinGrp img").attr("src","/img/join hover.png");
+  })
+  .on('mouseout', function() {
+    $(".joinGrp img").attr('src', "/img/join.png");
+})
+$('.drpd-btn').submit(function (e) {
 
- 
+  e.preventDefault();
+})
+});
+
 var ok=false;
 var backarrow = false;
 if($(window).width() < 900){
@@ -110,3 +129,4 @@ $('.see-more').on('click',function(){
  $(this).siblings().removeClass('collapsed');
  $(this).remove();
 })
+//tool tip

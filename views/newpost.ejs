@@ -13,8 +13,24 @@
                 <label for="description"><h5>Description</h5></label>
                 <textarea class="form-control" name="post[description]" id="description" rows="13" cols="80" required>
                 </textarea>
-            </div>            
+            </div>   
             <div class="form-group">
+              <label for="image">
+                <a class="btn btn-primary text-light" role="button" aria-disabled="false">+ Add Images</a>
+                
+              </label>
+            
+              <input type="file" name="image" accept="image/*" id="image" style="visibility: hidden; position: absolute;" multiple/>
+              <p id="files-area">
+                <span id="filesList">
+                  <span id="files-names">
+                  </span>
+                </span>
+              </p>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>   
+            <!--<div class="form-group">
               <h5>Add Images (Max 3 Images)</h5><br>
               <label id="lab-img" for="image">
                 <i class="fa fa-plus imgAdd"></i>
@@ -29,6 +45,7 @@
         </form>
           
     </div>
+  -->
   <%- include("partial/scripts") %>
  <script>
      var editor = CKEDITOR.replace( 'description');

@@ -34,6 +34,7 @@ router.post('/approve/:id',async(req,res)=>{
     try{
         let userId = req.params.id;
         let {password,hashedPassword} = await tempPassword();
+        console.log(password)
         const result = await User.findByIdAndUpdate(userId,
             {
                 $set: {
