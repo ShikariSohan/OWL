@@ -1,0 +1,36 @@
+<%- include("partial/head") %>
+<%- include("partial/sidebar_left") %>
+<div class="w-50 p-4 m-auto">
+<% user.saves.forEach((save) => {%>
+    <div class="card mb-3 shadow-sm" style="border-radius: 10px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+              <% if(save.image.length>0) {%>
+            <img src="<%=save.image[0].url %>" width="400px" class="card-img" alt="...">
+            <%}else{%>
+                <img src="<%=save.author.avatar.url %>" class="card-img" alt="...">  
+                <%}%>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/post/<%=save._id%>" class='m-0 p-0' style="color: black;">
+                <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=save.title%></p>
+              </a></h5>
+              <div class="card-text collapsed m-0 mb-2 p-0">
+                <p><%- save.description %></p> 
+              </div> 
+              <p class="card-text  d-flex justify-content-between">
+                  <small class="text-muted" style="font-family: Exo 2;">Saved from <b><%= save.author.name %></b>'s post</small>
+                  <small class="text-muted" style="float:right;font-family: Exo 2;" data-toggle="tooltip"  title="<%= new Date(save.createdAt).toString()%>">Posted <%=timeAgo.format((save.createdAt.getTime()))%></p>
+                  </small>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%})%>
+</div>
+<!-- New PopUp Modal For create Community -->
+<%- include("partial/newCommunity") %> 
+<%- include("partial/scripts") %>
+<%- include("partial/foot") %>

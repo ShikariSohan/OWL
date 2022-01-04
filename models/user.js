@@ -36,6 +36,11 @@ User  =  new Schema({
         type :Boolean ,
         default : false
     },
+    saves:[{
+        type: Schema.Types.ObjectId,
+        ref:'Post',
+        autopopulate: true
+    }],
     upvotes_downvotes:[{
         postId:{ type: Schema.Types.ObjectId , ref:'Post'},
         types: String
@@ -56,4 +61,5 @@ User  =  new Schema({
     }]
 
 });
+User.plugin(require('mongoose-autopopulate'));
 module.exports = Mongoose.model('User',User);

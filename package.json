@@ -23,6 +23,7 @@
     "http": "0.0.1-security",
     "javascript-time-ago": "^2.3.8",
     "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
     "mongoose": "^5.12.13",
     "mongoose-autopopulate": "^0.14.0",
     "morgan": "^1.10.0",

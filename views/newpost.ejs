@@ -1,8 +1,29 @@
-<%- include("partial/head") %>
-<%- include("partial/simplenavbar") %>
-<%- include("partial/sidebar_left") %>
-<link rel="stylesheet" href="/css/imgPreview.css">
-<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/css/OwlColors.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/favicon.ico">
+    <script src="https://kit.fontawesome.com/ae021b20b4.js" crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="/css/imgPreview.css">
+    <link rel="stylesheet" type="text/css" href="ckeditor/plugins/codesnippet/lib/highlight/styles/atelier-heath.light.css" />
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+   <script src="/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+   <script>hljs.initHighlightingOnLoad();</script>
+   
+    <!--<link rel="stylesheet" href="../../css/bootstrap.min.css">-->
+    <title>Owl</title>
+</head>
+<body>
+<%- include("partial/navbar") %>
 
 <div class="m-5 p-5">
         <form action="/post/new" method="POST" enctype="multipart/form-data" >
@@ -15,8 +36,24 @@
                 <label for="description"><h5>Description</h5></label>
                 <textarea class="form-control" name="post[description]" id="description" rows="13" cols="80" required>
                 </textarea>
-            </div>            
+            </div>   
             <div class="form-group">
+              <label for="image">
+                <a class="btn btn-primary text-light" role="button" aria-disabled="false">+ Add Images</a>
+                
+              </label>
+            
+              <input type="file" name="image" accept="image/*" id="image" style="visibility: hidden; position: absolute;" multiple/>
+              <p id="files-area">
+                <span id="filesList">
+                  <span id="files-names">
+                  </span>
+                </span>
+              </p>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>   
+            <!--<div class="form-group">
               <h5>Add Images (Max 3 Images)</h5><br>
               <label id="lab-img" for="image">
                 <i class="fa fa-plus imgAdd"></i>
@@ -31,6 +68,7 @@
         </form>
           
     </div>
+  -->
   <%- include("partial/scripts") %>
  <script>
      var editor = CKEDITOR.replace( 'description');

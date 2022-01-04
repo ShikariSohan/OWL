@@ -1,0 +1,38 @@
+<%- include("partial/head") %>
+
+<link rel="stylesheet" href="/css/imgPreview.css">
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<%- include("partial/sidebar_left") %>
+<div class="m-auto p-5 w-50">
+        <form action="/post/<%=post._id%>?_method=PUT" method="POST" enctype="multipart/form-data" >
+            <div class="form-group">
+              <label for="title"><h5>Edit Title</h5></label>
+              <input type="text" class="form-control" name="post[title]" id="title" aria-describedby="title_des" placeholder="Add title" value="<%=post.title%>" required>
+              <small id="title_des" class="form-text text-muted">Add a simple title</small>
+            </div>
+            <div class="form-group">
+                <label for="description"><h5>Edit Description</h5></label>
+                <textarea class="form-control" name="post[description]" id="description" rows="13" cols="80" required>
+                    <%=post.description%>
+                </textarea>
+            </div>            
+           
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+          
+    </div>
+  <%- include("partial/scripts") %>
+ <script>
+     var editor = CKEDITOR.replace( 'description');
+      editor.on( 'contentDom', function() {
+       var editable = editor.editable();
+       editable.attachListener( editable, 'click', function( evt ) {
+      var link = new CKEDITOR.dom.elementPath( evt.data.getTarget(), this ).contains( 'a' );
+    if ( link && evt.data.$.button != 2) {
+      window.open( link.getAttribute( 'href' ) );
+    }
+  }, null, null, 15 );
+} );
+//CKEDITOR.instances["description"].setData(post.description);
+</script>
+ <%- include("partial/foot") %>

@@ -11,11 +11,13 @@ const colors = require('colors');
 const session = require('express-session');
 const flash = require('connect-flash');
 const ejsLint = require('ejs-lint');
+const methodOverride = require('method-override');
 //const upvoteDownvoteOfPosts = require('./models/upvoteAndDownvoteOfPosts');
 const signupRouter = require('./routers/signup');
 const loginRouter = require('./routers/login');
 const accRouter = require('./routers/myAcc');
 const postRouter = require('./routers/post');
+const saveRouter = require('./routers/saved');
 const communityRouter = require('./routers/community')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -52,7 +54,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 app.use(cookieParser(process.env.cookieString));
-
+app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 //app.use(cors());
 
@@ -71,6 +73,7 @@ app.use((req,res,next)=>{
 app.use('/signup',signupRouter);
 app.use('/',loginRouter);
 app.use('/profile',isLoggedin,accRouter);
+app.use('/saved',isLoggedin,saveRouter);
 app.use('/post',isLoggedin,postRouter);
 app.use('/',isLoggedin,communityRouter);
 
@@ -85,7 +88,9 @@ app.get('/',isLoggedin,async(req, res) => {
     const getUser = await User.findOne({_id: currentuser._id}) 
     res.render("home",{posts,timeAgo,getUser});
 });
-//home end
+//saved
+
+
 
 const port = process.env.PORT || 2727 ;
 http.listen(port, ()=>{

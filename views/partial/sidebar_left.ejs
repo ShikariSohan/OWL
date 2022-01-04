@@ -1,43 +1,67 @@
-<nav id="sidebar">
+<nav id="sidebar" class="m-4">
 
     <ul class="list-unstyled components">
+        <li>
+            <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.image %>" class="avatar1"><br><b><%=currentUser.name%></b>
+            <br>Contribution: 0</a>
+        </li>
+        
         <li class="active">
-            <a href="/" >Home</a>   
+            <a href="/" ><i class="fa fa-home mr-2"></i> Home</a>   
         </li>
         <li>
-            <a href="#">Notifications</a>
+            <a href="#"><i class="fa fa-hashtag mr-2"></i> Tags</a>
         </li>
         <li>
-            <a href="/c/joincommunites">Join a Community</a>
+            <a href="/c/joincommunites" class="joinGrp"  onmouseout="JoinGrp();"><img class=" mr-2"
+                src="/img/join.png"
+                alt="cant load"
+                loading="lazy" 
+                
+              />Join Communities</a>
         </li>
         <li>
-            <a data-toggle="modal" data-target="#exampleModal" data-whatever="<%=currentUser.name%>"> Create Community</a>
+            <a class="crtGrp" data-toggle="modal" data-target="#exampleModal" data-whatever="<%=currentUser.name%>"  onmouseout="CreateGrp();"><img
+                class="mr-1"
+                src="/img/grp.png"
+                alt="cant load"
+                loading="lazy"
+                
+              />
+
+            </i>Create Community</a>
         </li>
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Community</a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2" aria-hidden="true"></i>My Communities</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
+<<<<<<< HEAD
                 <% if(currentUser.community.length>0) {%> 
                     <% currentUser.community.forEach((com,i) => {%>
                         <li class="drpd">
                             <a href="/c/<%= com.name%>"><%= com.name%> </a>
                         </li >
                       <%})}%>
+=======
+                <li class="drpd">
+                    <a href="#">CSE 2018</a>
+                </li >
+>>>>>>> dcd8ee3a4d45cb833161c59fb67696e20ec88435
             </ul>
         </li>
         <li>
-            <a href="#">Reading List</a>
+            <a href="/saved/<%=currentUser._id%> "><i class='fa fa-bookmark mr-2 ml-1' aria-hidden="true"></i>Saved</a>
         </li>
         <li>
-            <a href="#">Acheveiments</a>
+            <a href="#"><i class="fa fa-trophy mr-2" aria-hidden="true"></i>  Acheveiments</a>
+        </li>
+       
+        <li>
+       
+        <li>  
+            <a href="#"><i class="fas fa-cog mr-2"></i>Settings</a>
         </li>
         <li>
-            <a href="/profile/<%=currentUser._id%>">My Account</a>
-        </li>
-        <li>
-            <a href="#">Settings</a>
-        </li>
-        <li>
-            <a href="/logout">Logout</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
         </li>
     </ul>
 </nav>
