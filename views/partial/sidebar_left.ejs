@@ -34,18 +34,12 @@
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2" aria-hidden="true"></i>My Communities</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
-<<<<<<< HEAD
                 <% if(currentUser.community.length>0) {%> 
                     <% currentUser.community.forEach((com,i) => {%>
                         <li class="drpd">
                             <a href="/c/<%= com.name%>"><%= com.name%> </a>
                         </li >
                       <%})}%>
-=======
-                <li class="drpd">
-                    <a href="#">CSE 2018</a>
-                </li >
->>>>>>> dcd8ee3a4d45cb833161c59fb67696e20ec88435
             </ul>
         </li>
         <li>
