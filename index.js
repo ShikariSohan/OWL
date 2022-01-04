@@ -84,7 +84,8 @@ app.get('/',isLoggedin,async(req, res) => {
     currentuser = req.user;
     res.clearCookie('communityName');
     res.cookie('communityName', 'Owl');
-    const posts =  await Post.find({community : "Owl"}).sort('-createdAt');   
+    //const posts =  await Post.find({community : "Owl"}).sort('-createdAt');   
+    const posts =  await Post.find({}).sort('-createdAt');   
     const getUser = await User.findOne({_id: currentuser._id}) 
     res.render("home",{posts,timeAgo,getUser});
 });

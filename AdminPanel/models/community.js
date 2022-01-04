@@ -18,6 +18,15 @@ Community  =  new Schema({
     }],
     admin:[{
         adminId:{ type: Schema.Types.ObjectId , ref:'User'}
+    }],
+    description : {
+        type : String,
+    },
+    requestedMember:[{
+        memberId:{ type: Schema.Types.ObjectId , ref:'User'}
+    }],
+    requestedAdmin:[{
+        memberId:{ type: Schema.Types.ObjectId , ref:'User'}
     }]
 });
 module.exports = Mongoose.model('Community',Community);

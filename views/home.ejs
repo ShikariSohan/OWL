@@ -148,7 +148,7 @@
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button class="btn btn-danger">Report<i class="fas fa-paper-plane-o ml-1"></i></button>
+        <button class="btn btn-danger <%= post.community %> " id="reportID">Report<i class="fas fa-paper-plane-o ml-1"></i></button>
       </div>
     </div>
   </div>
@@ -176,6 +176,13 @@
 <!-- New PopUp Modal For create Community -->
 <%- include("partial/newCommunity") %> 
 <%- include("partial/scripts") %>
+<script>
+  document.getElementById("reportID").onclick = function() {myFunction()};
+  
+  function myFunction() {
+    console.log(document.getElementById("demo"));
+  }
+  </script>
 <%- include("partial/foot") %>
 
 

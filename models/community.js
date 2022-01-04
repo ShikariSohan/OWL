@@ -1,7 +1,7 @@
 const  Mongoose  = require('mongoose');
 const Schema = Mongoose.Schema;
 
-Community  =  new Schema({
+const Community  =  new Schema({
     name : {
         type : String,
         required : true

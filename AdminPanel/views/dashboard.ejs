@@ -7,7 +7,7 @@
           <div class="box">
               <div class="right-side">
                   <div class="box-topic"> Total Members </div>
-                  <div class="number"> 1078 </div>
+                  <div class="number"><%= totalUser %>    </div>
                   <div class="indicator">
                       <i class="bx bx-up-arrow-alt"></i>
                       <span class="text"> Up from yesterday </span>
@@ -17,8 +17,8 @@
           </div>
           <div class="box">
               <div class="right-side">
-                  <div class="box-topic"> New Member Request </div>
-                  <div class="number"> 15 </div>
+                  <div class="box-topic"> New Requests </div>
+                  <div class="number"> <%= totalRequest %>  </div>
                   <div class="indicator">
                       <i class="bx bx-up-arrow-alt"></i>
                       <span class="text"> Up from yesterday </span>
@@ -28,8 +28,8 @@
           </div>
           <div class="box">
               <div class="right-side">
-                  <div class="box-topic"> Unread Logs </div>
-                  <div class="number"> 12 </div>
+                  <div class="box-topic"> Total Community </div>
+                  <div class="number"> <%= totalCommunity %> </div>
                   <div class="indicator">
                       <i class="bx bx-up-arrow-alt"></i>
                       <span class="text"> Up from yesterday </span>
@@ -39,8 +39,8 @@
           </div>
           <div class="box">
               <div class="right-side">
-                  <div class="box-topic"> New Post </div>
-                  <div class="number"> 11, 086 </div>
+                  <div class="box-topic"> Total Post </div>
+                  <div class="number"> <%= totalPost %> </div>
                   <div class="indicator">
                       <i class="bx bx-down-arrow-alt down"></i>
                       <span class="text"> Down From Today </span>
@@ -53,68 +53,29 @@
           <div class="recent-sales box">
               <div class="title"> New Members </div>
               <div class="sales-details">
-               
-                  <div class="card">
-                      <div class="card_content">
-                          <h4>Moksedur Rahman Sohan</h4>
-                          <div class="dd">
-                              <h6>cse</h6>
-                              <h6>12:12:21</h6>
-                          </div>
-                          <h5>2018331078</h5>
-                      </div>
-                  </div>
-
-                  <div class="card">
+               <% newUsers.forEach(user => { %>
+                <div class="card">
                     <div class="card_content">
-                        <h4>Moksedur Rahman Sohan</h4>
+                        <h4>user.name</h4>
                         <div class="dd">
-                            <h6>cse</h6>
+                            <h6>user.department</h6>
                             <h6>12:12:21</h6>
                         </div>
-                        <h5>2018331078</h5>
+                        <h5>user.reg</h5>
                     </div>
                 </div>
-                <div class="card">
-                  <div class="card_content">
-                      <h4>Moksedur Rahman Sohan</h4>
-                      <div class="dd">
-                          <h6>cse</h6>
-                          <h6>12:12:21</h6>
-                      </div>
-                      <h5>2018331078</h5>
-                  </div>
-              </div>
-              <div class="card">
-                <div class="card_content">
-                    <h4>Moksedur Rahman Sohan</h4>
-                    <div class="dd">
-                        <h6>cse</h6>
-                        <h6>12:12:21</h6>
-                    </div>
-                    <h5>2018331078</h5>
-                </div>
+               <% }) %>
             </div>
               </div>
           </div>
           <div class="top-contributors">
               <h3>Top Contributors</h3>
-              <div class="persons">
-                  <img src={rahat} alt="img" class="photo" />
-                  <h4>Mohammad Rahat</h4>
-              </div>
-              <div class="persons">
-                  <img src={delwar} alt="img" class="photo" />
-                  <h4>Delwar Hossain</h4>
-              </div>
-              <div class="persons">
-                  <img src={sohan} alt="img" class="photo" />
-                  <h4>Moksedur Rahman</h4>
-              </div>
-              <div class="persons">
-                  <img src={shanto} alt="img" class="photo" />
-                  <h4>Hasibul Islam Shanto</h4>
-              </div>
+              <% newUsers.forEach(user => { %>
+                <div class="persons">
+                    <img src="<%= user.avatar.url %> " alt="img" class="photo" />
+                    <h4><%= user.name %> </h4>
+                </div>
+              <% }) %>
           </div>
       </div>
   </div>

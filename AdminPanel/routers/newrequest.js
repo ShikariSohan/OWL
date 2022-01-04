@@ -1,17 +1,19 @@
 const express = require('express');
+const Community = require('../models/community');
+const User = require('../models/user');
 const { isLoggedin,tempPassword } = require('../utils/common');
 const { mailSender } = require('../utils/mail');
 const { passwordTemplate } = require('../utils/mailTemplate');
 const router =  express.Router();
-const User = require('../models/user');
-
 router.use(isLoggedin);
 
 router.get('/newrequest',async(req,res)=>{
     try {
         const requests =  await User.find({isVerified:false});
+        const totalRequest = await User.count({isVerified:false});
         res.render('newRequest',{
-            newUsers:requests
+            newUsers:requests,
+            totalRequest
         });
     }
     catch (err){
@@ -23,7 +25,8 @@ router.get('/newrequest',async(req,res)=>{
 router.get('/newrequest/:id',async(req,res)=>{
     try{
         const newUser =  await User.findOne({ _id: req.params.id});
-        res.render("newRequestProfile",{newUser});
+        const totalRequest = await User.count({isVerified:false});
+        res.render("newRequestProfile",{newUser,totalRequest});
     }
     catch(err){
         console.log(err);
@@ -44,10 +47,25 @@ router.post('/approve/:id',async(req,res)=>{
                         url:"https://res.cloudinary.com/kongkacloud/image/upload/v1640077406/Pngtree_cartoon_owl_teacher_1045061_vzyilt.png",
                         filename:"userDefaultAvatar"
                     }
+                },
+                $push: {
+                    community : {
+                        isAdmin : false,
+                        name : "Owl"
+                    }
                 }
+
             },
             { new: true }
         );
+        const community = await Community.findOneAndUpdate({name:"Owl"},
+        {
+            $push: {
+                member : {
+                    _id : userId
+                }
+            }
+        })
         const mailResult = await mailSender(
             result.email,
             "You account is Verified",

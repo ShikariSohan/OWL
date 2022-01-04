@@ -1,8 +1,8 @@
 const express = require('express');
-const router =  express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const router =  express.Router();
 
 router.get('/login', (req, res) => {
     res.render("login");
@@ -16,8 +16,9 @@ router.post('/login',async(req,res)=>{
             req.flash('error',"Nothing Here");
             return res.redirect('/login');
         }
-        const existingUser = await User.findOne({ email });
-
+        console.log("jellesmfsmfis");
+         const existingUser = await User.findOne({ email });
+        
         if(!existingUser){
             console.log("user Not Found");
             req.flash('error',"User Not Found");
@@ -30,6 +31,11 @@ router.post('/login',async(req,res)=>{
             req.flash('error',"Invalid Credentials");
             return res.redirect('/login');
         }
+        if(!existingUser.isSuperAdmin)
+            {
+                req.flash('error',"Not an Admin");
+                return res.redirect('/login');
+            }
        
         const token = jwt.sign({
             email : existingUser.email,
@@ -47,10 +53,7 @@ router.post('/login',async(req,res)=>{
             httpOnly: true,
             signed: true,
           });
-  
-
-        console.log(token);
-        return res.redirect('/');
+        return res.redirect('/dashboard');
 
     } catch (err) {
         console.log(err);

@@ -66,15 +66,6 @@ app.get('/',isLoggedin,(req, res) => {
 });
 //home end
 
-// app.post('/superAdminSignup',async(req,res)=>{
-//     const {email,name,image} = req.body;
-//     const shikari = new superAdmin({email,name});
-//     shikari.image = {url: image, filename: "avatarOfsuperadmin1"};
-//     console.log(shikari);
-//     const done = await superAdmin.register(shikari,"riyoandshikari");
-//     res.send(done);
-
-// });
 
 const port = process.env.PORT;
 app.listen(port, ()=>{
