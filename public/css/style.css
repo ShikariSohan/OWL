@@ -43,6 +43,16 @@ body {
     transition: all 0.5s ease;
     
     }
+    #bdy-post{
+        position: relative;
+        align-self: center;
+        max-width: 1000px;
+        min-width: 400px;
+        margin:auto;
+        
+        transition: all 0.5s ease;
+
+    }
     
   /* sidebar left*/
   nav{
