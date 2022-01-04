@@ -72,14 +72,16 @@ app.use('/signup',signupRouter);
 app.use('/',loginRouter);
 app.use('/profile',isLoggedin,accRouter);
 app.use('/post',isLoggedin,postRouter);
-app.use('/c',isLoggedin,communityRouter);
+app.use('/',isLoggedin,communityRouter);
 
 
 //home
 let currentuser;
 app.get('/',isLoggedin,async(req, res) => {
     currentuser = req.user;
-    const posts =  await Post.find({}).sort('-createdAt');   
+    res.clearCookie('communityName');
+    res.cookie('communityName', 'Owl');
+    const posts =  await Post.find({community : "Owl"}).sort('-createdAt');   
     const getUser = await User.findOne({_id: currentuser._id}) 
     res.render("home",{posts,timeAgo,getUser});
 });

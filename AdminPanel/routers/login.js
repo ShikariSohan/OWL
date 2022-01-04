@@ -2,7 +2,7 @@ const express = require('express');
 const router =  express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const superAdmin = require('../models/superAdmin');
+const User = require('../models/user');
 
 router.get('/login', (req, res) => {
     res.render("login");
@@ -10,14 +10,13 @@ router.get('/login', (req, res) => {
 
 router.post('/login',async(req,res)=>{
     const {email,password} = req.body;
-
     try {
         if(!email || !password)
         {
             req.flash('error',"Nothing Here");
             return res.redirect('/login');
         }
-        const existingUser = await superAdmin.findOne({ email });
+        const existingUser = await User.findOne({ email });
 
         if(!existingUser){
             console.log("user Not Found");
@@ -42,7 +41,6 @@ router.post('/login',async(req,res)=>{
                 expiresIn : process.env.jwtExpiry
             }
         );
-
         // set cookie
         res.cookie(process.env.cookieName, token, {
             maxAge: process.env.cookieExpiry,

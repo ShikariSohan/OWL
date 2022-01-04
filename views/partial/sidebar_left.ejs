@@ -8,7 +8,7 @@
             <a href="#">Notifications</a>
         </li>
         <li>
-            <a href="#">Join a Community</a>
+            <a href="/c/joincommunites">Join a Community</a>
         </li>
         <li>
             <a data-toggle="modal" data-target="#exampleModal" data-whatever="<%=currentUser.name%>"> Create Community</a>
@@ -16,15 +16,12 @@
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Community</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li class="drpd">
-                    <a href="#">CSE 2018</a>
-                </li >
-                <li class="drpd">
-                    <a href="#">SUST IICT</a>
-                </li>
-                <li class="drpd">
-                    <a href="#">2/2 Geeks</a>
-                </li>
+                <% if(currentUser.community.length>0) {%> 
+                    <% currentUser.community.forEach((com,i) => {%>
+                        <li class="drpd">
+                            <a href="/c/<%= com.name%>"><%= com.name%> </a>
+                        </li >
+                      <%})}%>
             </ul>
         </li>
         <li>

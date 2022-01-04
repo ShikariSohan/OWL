@@ -40,6 +40,20 @@ User  =  new Schema({
         postId:{ type: Schema.Types.ObjectId , ref:'Post'},
         types: String
     }],
+    isSuperAdmin:{
+        type:Boolean , 
+        default : false
+    },
+    community:[{
+        name :{type:String},
+        isAdmin:{
+            type :Boolean ,
+            default : false
+        }
+    }],
+    requestedCommunity:[{
+        name :{type:String}
+    }]
 
 });
 module.exports = Mongoose.model('User',User);

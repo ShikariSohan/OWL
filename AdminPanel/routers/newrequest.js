@@ -4,6 +4,7 @@ const { mailSender } = require('../utils/mail');
 const { passwordTemplate } = require('../utils/mailTemplate');
 const router =  express.Router();
 const User = require('../models/user');
+
 router.use(isLoggedin);
 
 router.get('/newrequest',async(req,res)=>{
@@ -12,7 +13,6 @@ router.get('/newrequest',async(req,res)=>{
         res.render('newRequest',{
             newUsers:requests
         });
-
     }
     catch (err){
         console.log(err);
@@ -52,6 +52,8 @@ router.post('/approve/:id',async(req,res)=>{
             "You account is Verified",
             passwordTemplate(password)
         );
+        console.log("Your Password is :"+password);
+        console.log(mailResult);
         res.redirect("/newrequest");
     }
     catch(err)

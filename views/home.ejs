@@ -1,4 +1,5 @@
 <%- include("partial/head") %>
+<%- include("partial/navbar") %>
 <%- include("partial/sidebar_left") %>
 <div id="bdy">
 <% for(let post of posts){ %> 
@@ -32,7 +33,8 @@
               
               
             </div>
-            <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+            <p class="m-0 p-0 pb-2 float-right" style="font-size: small; color: rgb(110, 106, 106);"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+            <a href="c/<%=post.community%>"><p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=post.community%></p></a>
           </div>
           <div class="card-text m-2 p-2">
             <div class="collapsed m-0 p-0">

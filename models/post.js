@@ -31,7 +31,10 @@ const PostSchema = new Schema({
     comments:{
         type:Number,
         default:0
-    } ,  
+    } , 
+    community:{
+        type:String
+    } 
 },
 {
     timestamps: true
