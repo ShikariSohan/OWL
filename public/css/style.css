@@ -536,7 +536,7 @@ outline: none;
     display: inline-block;
   }
   
-  .btn {
+  .btn .up {
   
     color: rgb(255, 255, 255);
     background-color: var(--skyblue);
