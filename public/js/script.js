@@ -129,4 +129,32 @@ $('.see-more').on('click',function(){
  $(this).siblings().removeClass('collapsed');
  $(this).remove();
 })
-//tool tip
+//reply
+
+$('.reply').on('click',function()
+  {
+    if($('#cke_replies').is(':visible'))
+    {
+      console.log('yo');
+      $('#cke_replies').parent().remove();
+    }
+   $(this).closest( ".comment" ).siblings('form').append(
+     '<div class="form-group"> <textarea class="form-control" name="comment" id="replies" required> </textarea> </div><button type="submit" class="btn btn-primary mb-2">Comment</button>'
+     
+     )
+     Ckeditor();
+  
+}
+)
+function Ckeditor(){
+let editor1 = CKEDITOR.replace( 'replies');
+   editor1.on( 'contentDom', function() {
+    let editable = editor1.editable();
+    editable.attachListener( editable, 'click', function( evt ) {
+   let link = new CKEDITOR.dom.elementPath( evt.data.getTarget(), this ).contains( 'a' );
+ if ( link && evt.data.$.button != 2) {
+   window.open( link.getAttribute( 'href' ) );
+ }
+}, null, null, 15 );
+} );
+}

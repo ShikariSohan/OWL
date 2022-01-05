@@ -40,7 +40,11 @@ router.post('/:id/new/comment',async(req,res)=>{
         const comment = {
             author : req.user._id,
             comment : req.body.comment,
-            post : req.params.id
+            post : req.params.id,
+            upvotes: 0,
+            downvotes:0,
+            IsReply: false,
+            reply:[]
         }
         const newComment = new Comment(comment);
         await newComment.save();
@@ -61,7 +65,43 @@ router.post('/:id/new/comment',async(req,res)=>{
     }
     
 });
-//Post get by id area
+router.post('/:postid/comment/:id/',async(req,res)=>{
+    try{
+        const comment = {
+            author : req.user._id,
+            comment : req.body.comment,
+            post : req.params.postid,
+            upvotes: 0,
+            downvotes:0,
+            IsReply: true,
+            reply:[]
+        }
+
+        console.log(req.params.postid,req.params.id)
+        const newComment = new Comment(comment);
+        await newComment.save();
+        await Comment.findByIdAndUpdate({_id: req.params.id},
+            { $push: 
+                { 
+                    reply: newComment._id // push to reply array
+              } ,
+            });
+        await Post.findByIdAndUpdate(
+            {_id: req.params.postid},
+            {
+                $inc: {
+                comments:1
+                }
+             });
+    }
+    catch(err){
+        console.log(err);
+        req.flash('error',err.message);
+        res.redirect('/');
+    }
+    res.redirect(`/post/${req.params.postid}`);
+});
+//Post get by id 
 router.get('/:id', async(req, res) => {
     try{
         currentuser = req.user;
