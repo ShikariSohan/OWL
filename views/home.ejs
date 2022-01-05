@@ -162,7 +162,7 @@
         <a href="/post/<%=post._id%>" style="font-size: 14px; color: #9A9A9A" class="m-2">
           <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
         </a>
-        <% if(post.author.contribution<500){  
+        <% if(post.author.contribution<500){%>  
           <div style="float: right;"><a class="d-flex" style="color:#44cdfc" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
         </a>
@@ -193,5 +193,4 @@
   }
   </script>
 <%- include("partial/foot") %>
-
 

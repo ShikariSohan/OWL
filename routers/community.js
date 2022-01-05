@@ -136,4 +136,21 @@ router.get('/c/:name',async(req,res)=>{
     const getUser = await User.findOne({_id:  res.locals.currentUser._id}) 
     res.render("community",{posts,timeAgo,getUser});
 });
+router.get('/tags',isLoggedin,async(req,res)=>{
+    res.render("tags");
+})
+router.get('/tag/:tag',isLoggedin,async(req,res)=>{
+    try{
+        let tag = req.params.tag;
+        const posts = await Post.find({tag:tag}); 
+        res.render("search",{
+            posts,searchText:tag,timeAgo
+        });
+    }
+    catch(err)
+    {
+        res.redirect('/');
+    }
+    
+})
 module.exports=router;

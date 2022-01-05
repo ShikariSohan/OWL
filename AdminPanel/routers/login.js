@@ -24,12 +24,12 @@ router.post('/login',async(req,res)=>{
             return res.redirect('/login');
         }
 
-        // const passwordMatch = await bcrypt.compare(password,existingUser.password);
+        const passwordMatch = await bcrypt.compare(password,existingUser.password);
         
-        // if(!passwordMatch){
-        //     req.flash('error',"Invalid Credentials");
-        //     return res.redirect('/login');
-        // }
+        if(!passwordMatch){
+            req.flash('error',"Invalid Credentials");
+            return res.redirect('/login');
+        }
         if(!existingUser.isSuperAdmin)
             {
                 req.flash('error',"Not an Admin");

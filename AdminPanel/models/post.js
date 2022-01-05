@@ -34,6 +34,9 @@ const PostSchema = new Schema({
     } , 
     community:{
         type:String
+    },
+    tag:{
+        type:String
     } 
 },
 {

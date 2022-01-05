@@ -23,6 +23,9 @@ router.post('/new', upload.array('image'), async(req, res) => {
     post.downvotes = 0;
     post.comments = 0;
     post.community=req.cookies['communityName'];
+    let tag = req.body.tag;
+    post.tag=tag.toLowerCase();
+    
     await post.save();  
     
     console.log(post);
