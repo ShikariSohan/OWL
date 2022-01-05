@@ -30,7 +30,7 @@ var socket = io(); //exposes an io global which is used by a particular client.
     $('.downvote-btn').on('click',function(e){
       j=$(this).index('.downvote-btn')
       downvote_val = downvote_val ? false: true;
-     const id =$(this).parent().parent().siblings('.card-title').find("a").attr('href').split('/').at(-1);
+      const id =$(this).parent().parent().siblings('.card-title').find(".postid a").attr('href').split('/').at(-1);
      const id1= $(this).parent().attr('id');
      e.preventDefault();   // prevent page reloading
      
@@ -76,8 +76,8 @@ var socket = io(); //exposes an io global which is used by a particular client.
      }
      else
      $('.upvote-btn-comment').eq(k).css('background-position', '2px -27px');
-     x[i].innerHTML = up;
-     y[i].innerHTML = down; // set the values
+     x[k].innerHTML = up;
+     y[k].innerHTML = down; // set the values
     });
     // downvote event
     var downvote_val_comment = false;
@@ -100,7 +100,23 @@ var socket = io(); //exposes an io global which is used by a particular client.
       }
      else
      $('.downvote-btn-comment').eq(l).css('background-position', '2px -27px');
-      x[j].innerHTML = down;
-      y[j].innerHTML = up;
+      x[l].innerHTML = down;
+      y[l].innerHTML = up;
       
      });
+     let starIndex = 0;
+     $('.starbtn').on('click',function(e){
+       starIndex=$(this).index('.starbtn');
+       cmntId = $(this).attr('id').split('-').at(-1);
+       alert(cmntId);
+       e.preventDefault();   // prevent page reloading
+     
+      socket.emit( 'starbtn',cmntId);
+     })
+     socket.on( 'update-star', function(id) {
+       alert(id)
+       var update = 'cmnt-'+id;
+      var x = document.getElementsById(update);
+      alert(x);
+      x.addClass('checked');
+     })

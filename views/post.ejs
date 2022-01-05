@@ -184,10 +184,17 @@
       <a href="/post/<%=post._id%>" style="font-size: 14px; color: rgb(110, 105, 105);" class="m-2">
         <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
       </a>
-          <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
-          <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
-        </a>
-        </div>
+      <% if(post.author.contribution<500){ %> 
+        <div style="float: right;"><a class="d-flex" style="color:#44cdfc" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
+        <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
+      </a>
+    </div>
+    <% }else{ %> 
+       <div style="float: right;"><a class="d-flex" style="color:#c808ee;" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
+        <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
+      </a>
+    </div>
+      <%}%>
           </div>
         </div>
         
@@ -211,12 +218,27 @@
     
     <div class="card mb-4 shadow-sm" style="border-radius: 10px;">
       <div class="card-body"> 
+      
         <div class="d-flex m-0 p-0"> 
-        <a class="d-flex" href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.avatar.url %>" class="avatar1" >
-          <p class="card-text ml-2" style="font-size: smaller;"><b><%= comment.author.name %></b></p></a> 
+          <% if(comment.author.contribution<500){ %>
+        <a class="d-flex"  href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.avatar.url %>" class="avatar1" >
+          <p class="card-text ml-2" style="font-size: smaller; color:#44cdfc"><b><%= comment.author.name %></b></p>
+        </a> 
+          <%}else{%>
+            <a class="d-flex"  href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.avatar.url %>" class="avatar1" >
+              <p class="card-text ml-2" style="font-size: smaller; color:#c808ee;"><b><%= comment.author.name %></b></p>
+            </a> 
+            <%}%>
           <p class="m-0 p-0 pl-2 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(comment.createdAt).toString()%>"><%=timeAgo.format((comment.createdAt.getTime()))%></p>        
+          
+          <% if((post.author._id.toString() == currentUser._id.toString())&&(comment.star == false)){%>
+          <span class="ml-2 fa fa-star starbtn" style="cursor:pointer" id="cmnt-<%=comment._id%>"></span>
+          <%}else if(comment.star == true){%>
+            <span class="ml-2 fa fa-star checked"></span>
+            <%}%>
         </div>
-        <div class="card-text m-0 p-0 ml-2" id=<%=getUser._id%> >
+        
+        <div class="card-text m-0 p-0 ml-2" id="<%=getUser._id%>" >
           <%- comment.comment %> 
           <div class="d-flex m-0 p-0" id="<%=comment._id%>">
             <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(comment._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="upvote")){%> 
@@ -237,8 +259,8 @@
                 /></button>
                 <%}%>
                 <p class="upvote-count-comment mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=comment.upvotes %> </p>
-                <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="downvote")){%>     
-                <button class="btn upvote downvote-btn-comment clicked-downvote"><img
+                <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(comment._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="downvote")){%>     
+                <button class="btn upvote downvote-btn-comment clicked-downvote-comment"><img
                   src="/img/downvote.ico"
                   width="1" height="1"
                   alt="cant load"
@@ -269,11 +291,27 @@
    <% for(let reply of comment.reply){%> 
     <div class="card  mb-4 shadow-sm" style="border-radius: 10px; margin-left: 50px;" >
       <div class="card-body"> 
-        <div class="d-flex m-0 p-0"> 
-        <a class="d-flex" href="/profile/<%=reply.author._id%>"><img src="<%=reply.author.avatar.url %>" class="avatar1" >
-          <p class="card-text ml-2" style="font-size: smaller;"><b><%= reply.author.name %></b></p></a> 
-          <p class="m-0 p-0 pl-2 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(reply.createdAt).toString()%>"><%=timeAgo.format((reply.createdAt.getTime()))%></p>        
-        </div>
+       
+          <div class="d-flex m-0 p-0"> 
+            <% if(reply.author.contribution<500){ %>
+          <a class="d-flex" href="/profile/<%=reply.author._id%>"><img src="<%=reply.author.avatar.url %>" class="avatar1" >
+            <p class="card-text ml-2" style="font-size: smaller; color:#44cdfc"><b><%= comment.author.name %>
+            </b></p>
+          </a> 
+            <%}else{%>
+              <a class="d-flex" href="/profile/<%=reply.author._id%>"><img src="<%=reply.author.avatar.url %>" class="avatar1" >
+                <p class="card-text ml-2" style="font-size: smaller; color:#44cdfc"><b><%= comment.author.name %>
+                </b></p>
+              </a> 
+              <% } %> 
+            <p class="m-0 p-0 pl-2 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(reply.createdAt).toString()%>"><%=timeAgo.format((reply.createdAt.getTime()))%></p>        
+            <% if((post.author._id.toString() == currentUser._id.toString())&&(reply.star == false)){%>
+              <span class="ml-2 fa fa-star starbtn" style="cursor:pointer" id="cmnt-<%=reply._id%>"></span>
+              <%}else if(reply.star == true){%>
+                <span class="ml-2 fa fa-star checked"></span>
+                <%}%>
+          </div>
+          
         <div class="card-text ml-2">
           <%- reply.comment %> 
           <div class="d-flex m-0 p-0" id=<%=reply.id%> >
@@ -296,7 +334,7 @@
                 /></button>
                 <%}%>
                 <p class="upvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.upvotes %> </p>
-                <% if((getUser.upvotes_downvotes!=undefined)&&(getUser.upvotes_downvotes.find(clicked => { return clicked.postId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes.find(clicked => {  return clicked.postId.equals(post._id) }).types=="downvote")){%>     
+                <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(comment._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="downvote")){%>     
                 <button class="btn upvote downvote-btn-comment clicked-downvote-comment"><img
                   src="/img/downvote.ico"
                   width="1" height="1"
@@ -332,7 +370,6 @@
 </div>
 <!-- New PopUp Modal For create Community -->
 <%- include("partial/newCommunity") %> 
-<%- include("partial/sidebar_right") %>
 
 <%- include("partial/scripts") %>
 <script>

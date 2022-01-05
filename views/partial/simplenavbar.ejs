@@ -45,7 +45,13 @@
   <a class="nav-link" href="#"><i class="fa fa-bell" style="font-size:18px"></i></a>
  </li>
  <li class="nav-item my-3">
-  <a class="nav-link " href="/profile/<%=currentUser._id%>"><img src="<%=currentUser.avatar.url %>" class="avatar2"><b class="ml-2" style="font-size:small;font-weight:bold;"><%=currentUser.name%></b></a>
+  <% if(currentUser.contribution < 500){ 
+    <a class="nav-link " style="font-weight:bolder;font-size:small;color: #28bbfa; background-color: #E5F6FD; border-radius: 20px;" href="/profile/<%=currentUser._id%>"><img src="<%=currentUser.avatar.url %>" class="avatar2">   
+      <b class="ml-2"></b><%=currentUser.name%></a>
+      <%}else{%>
+        <a class="nav-link " style="font-weight:bolder;font-size:small;color: #c808ee; background-color: #E5F6FD; border-radius: 20px;" href="/profile/<%=currentUser._id%>"><img src="<%=currentUser.avatar.url %>" class="avatar2">   
+          <b class="ml-2"></b><%=currentUser.name%></a>
+        <%}%>
  </li>
    
 </div>

@@ -10,7 +10,7 @@ html {
 }
 body { 
     padding-top: 70px; 
-    background-color: #E5E5E5;
+    background-color: #F5F5F5;
 }
 .navbar{
     padding: 1rem;
@@ -29,12 +29,13 @@ body {
 }
 
 .nav-link{
-    color: rgb(0, 0, 0);
+    color: rgb(20, 20, 20);
     align-self: center;
     margin: 5px;
     margin-top: 7px;
     padding: 7px;
 }
+
   /* centered body */
   #bdy{
     position: relative;
@@ -43,8 +44,7 @@ body {
     min-width: 400px;
     margin:auto;
     padding: 50px;
-    transition: all 0.5s ease;
-    
+    transition: all 0.5s ease; 
     }
     #bdy-post{
         position: relative;
@@ -426,8 +426,8 @@ transition: all 0.5s ease;
     border-radius: 50%;
 }
 .avatar2{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
 }
 
@@ -520,3 +520,6 @@ outline: none;
     font-size: 00.83em;
     color:var(--textColor)
 }
+.checked {
+    color: orange;
+  }

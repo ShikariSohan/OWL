@@ -124,8 +124,9 @@ io.on( 'connection', function( socket ) {
         let upButton = false; // to change the button color
         const post_Id = new ObjectID(id); // make the post id string to mongoose object id
         //const upvoteDownvote = await upvoteDownvoteOfPosts.findOneAndUpdate({postId: new ObjectID(id)});
+        console.log(id2);
         const getUser = await User.findOne({_id: currentuser_id}) // get current user
-      
+        console.log(getUser);
         const arr = getUser.upvotes_downvotes; // get the upvotes_downvotes array from current user
         
        let PreClicked ;
@@ -198,6 +199,13 @@ io.on( 'connection', function( socket ) {
             }
         
        //update result on client side
+       let points = upvote_count*5;
+       const author = await User.findByIdAndUpdate({_id: upvoteDownvote.author._id},
+        {
+           $inc:{
+               contribution:points
+           },
+        })
         io.emit( 'update-upvotes', upvoteDownvote.upvotes,upvoteDownvote.downvotes,upButton);
     }); // upvote section end
 
@@ -205,6 +213,7 @@ io.on( 'connection', function( socket ) {
     let downvote_count = 0; // to count total downvote
     // check if downvote button is clicked
     socket.on( 'downvote-event', async function(id,id2) {
+        console.log(id,id2)
         const currentuser_id = new ObjectID(id2);
         let ok = false;// set variable to check upvote was previously clicked
         let downButton = false;// to change the button color  
@@ -280,6 +289,13 @@ io.on( 'connection', function( socket ) {
         upvoteDownvote.upvotes-=1; //decrement if upvote button was clicked previously 
         await upvoteDownvote.save(); //save the user document
        }
+       let points= - downvote_count*5;
+       const author = await User.findByIdAndUpdate({_id: upvoteDownvote.author._id},
+        {
+           $inc:{
+               contribution:points
+           },
+        })
         io.emit( 'update-downvotes', upvoteDownvote.upvotes,upvoteDownvote.downvotes,downButton);
     });
      //Upvoting comment section
@@ -364,7 +380,13 @@ io.on( 'connection', function( socket ) {
               upvoteDownvote.downvotes = upvoteDownvote.downvotes-1; //decrement downvote nuber
               await upvoteDownvote.save(); //save the document
            }
-       
+           let points = upvote_count_comment*10;
+           const author = await User.findByIdAndUpdate({_id: upvoteDownvote.author._id},
+            {
+               $inc:{
+                   contribution:points
+               },
+            })
       //update result on client side
        io.emit( 'update-upvotes-comment', upvoteDownvote.upvotes,upvoteDownvote.downvotes,upButton);
    }); // upvote section end
@@ -448,8 +470,32 @@ io.on( 'connection', function( socket ) {
        upvoteDownvote.upvotes-=1; //decrement if upvote button was clicked previously 
        await upvoteDownvote.save(); //save the user document
       }
+      let points = -downvote_count_comment*10;
+       const author = await User.findByIdAndUpdate({_id: upvoteDownvote.author._id},
+        {
+           $inc:{
+               contribution:points
+           },
+        })
        io.emit( 'update-downvotes-comment', upvoteDownvote.upvotes,upvoteDownvote.downvotes,downButton);
    });
+   socket.on('starbtn',async function(id)
+   {
+       const cmntId = id;
+       id = new ObjectID(id);
+       const comment = await Comment.findOne(id)
+       comment.star = true;
+       await comment.save();
+       let points = 25;
+       const author = await User.findByIdAndUpdate({_id: comment.author._id},
+        {
+           $inc:{
+               contribution:points
+           },
+        })
+        io.emit( 'update-star',cmntId);
+   }
+   )
 });
     
     
