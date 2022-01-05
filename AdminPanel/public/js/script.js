@@ -93,7 +93,3 @@ $('.fa-info').on('click',function(){
   $('#info').toggleClass('d-none');
   $('#sidebar').removeClass('active');
 });
-document
-$(document).on("click", "#reportID", function () {
-  alert('yoo');
-});
