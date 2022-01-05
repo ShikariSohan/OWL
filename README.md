@@ -41,3 +41,4 @@ SL | Learning Task | Description | Status | Comment |
 Reg no: 2018331086
 ### 2 . Moksedur Rahman Sohan
 Reg no: 2018331068
+<small>&copy; 2021 - Dept. of CSE, SUST, BD</small>
