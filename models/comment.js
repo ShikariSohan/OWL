@@ -23,6 +23,9 @@ const CommentSchema = new Schema({
     downvotes:{
         type:Number
     },
+    star:{
+        type:Boolean
+    },
     IsReply:{
         type:Boolean
     },

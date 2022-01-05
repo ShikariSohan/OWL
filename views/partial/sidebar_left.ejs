@@ -1,9 +1,15 @@
-<nav id="sidebar" class="m-4">
+<nav id="sidebar" class="m-4 shadow">
 
     <ul class="list-unstyled components">
         <li>
-            <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.avatar.url %>" class="avatar1"><br><b><%=currentUser.name%></b>
-            <br>Contribution: 0</a>
+            <% if(currentUser.contribution<500){ %> 
+            <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="color:#44CDFC;padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.avatar.url %>" class="avatar1"><br><b><%=currentUser.name%></b>
+            <br>Contribution: <%=currentUser.contribution%></a>
+            <% }else{ %> 
+                
+                <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="color: #c808ee;padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.avatar.url %>" class="avatar1"><br><b><%=currentUser.name%></b>
+                    <br>Contribution: <%=currentUser.contribution%></a>
+                    <%}%>
         </li>
         
         <li class="active">

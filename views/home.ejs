@@ -4,7 +4,7 @@
 <div id="bdy">
 <% for(let post of posts){ %> 
   
-    <div class="card mb-4 posts shadow-sm" style="margin: auto; border-radius: 10px;" >
+    <div class="card mb-4 posts shadow" style="margin: auto; border-radius: 10px;" >
         <div class="card-body mb-0 pb-0">
           <div class="card-title mb-2" style="border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
             <%console.log(typeof currentUser._id,typeof post.author._id)%> 
@@ -87,7 +87,7 @@
        <%}%>
         </div>
         <div class="d-flex justify-content-between">
-          <div class="d-flex">
+          <div class="d-flex" id="<%=getUser._id%>">
             <% if((getUser.upvotes_downvotes!=undefined)&&(getUser.upvotes_downvotes.find(clicked => { return clicked.postId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes.find(clicked => {  return clicked.postId.equals(post._id) }).types=="upvote")){%> 
           <button class="btn upvote upvote-btn clicked"><img
             src="/img/downvote.ico"
@@ -162,10 +162,17 @@
         <a href="/post/<%=post._id%>" style="font-size: 14px; color: #9A9A9A" class="m-2">
           <i class="far fa-comment-alt"></i>  <%=post.comments%> comments
         </a>
-          <div style="float: right;"><a class="d-flex" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
+        <% if(post.author.contribution<500){  
+          <div style="float: right;"><a class="d-flex" style="color:#44cdfc" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
           <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
         </a>
       </div>
+      <% }else{%>
+        <div style="float: right;"><a class="d-flex" style="color: #c808ee;" href="/profile/<%=post.author._id%>"><img src="<%=post.author.avatar.url %>" class="avatar1" >
+          <p class="card-text ml-2" style="font-size: smaller;"><b><%= post.author.name %></b></p>
+        </a>
+      </div>
+        <%}%> 
           </div>
         </div>
         

@@ -44,6 +44,7 @@ router.post('/:id/new/comment',async(req,res)=>{
             post : req.params.id,
             upvotes: 0,
             downvotes:0,
+            star:false,
             IsReply: false,
             reply:[]
         }
@@ -74,6 +75,7 @@ router.post('/:postid/comment/:id/',async(req,res)=>{
             post : req.params.postid,
             upvotes: 0,
             downvotes:0,
+            star:false,
             IsReply: true,
             reply:[]
         }
