@@ -5,9 +5,12 @@ const Post = require('../models/post');
 const User = require('../models/user');
 const { isLoggedin } = require('../utilities/middlewares');
 const timeAgo = require('../utilities/timeAgo');
+// for new community
 router.get('/c/new', (req, res) => {
     res.render("newCommunity");
 });
+// for joinning new community
+
 router.get('/join/:name', async(req, res) => {
     try{
         const comName = req.params.name;
@@ -92,7 +95,7 @@ router.post('/c/new',async(req,res)=>{
     }
    
 })
-
+// check for duplicate name for community
 router.post('/c/checkname',async(req,res)=>{
    try{
     const name = req.body.name;
@@ -119,6 +122,7 @@ router.post('/c/checkname',async(req,res)=>{
         })
     }
 });
+// for viewing communities
 router.get('/c/joincommunites',async(req,res)=>{
     try{
         const communities = await Community.find({});
@@ -136,9 +140,11 @@ router.get('/c/:name',async(req,res)=>{
     const getUser = await User.findOne({_id:  res.locals.currentUser._id}) 
     res.render("community",{posts,timeAgo,getUser});
 });
+// for showing all the tags
 router.get('/tags',isLoggedin,async(req,res)=>{
     res.render("tags");
 })
+// show all the posts of those tags
 router.get('/tag/:tag',isLoggedin,async(req,res)=>{
     try{
         let tag = req.params.tag;

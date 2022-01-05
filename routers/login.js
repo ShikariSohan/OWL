@@ -3,10 +3,11 @@ const router =  express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+// showing login page
 router.get('/login', (req, res) => {
     res.render("login");
 });
-
+// logged in a user 
 router.post('/login',async(req,res)=>{
     const {email,password} = req.body;
 
@@ -59,7 +60,7 @@ router.post('/login',async(req,res)=>{
         return res.redirect('/login');
     }
 });
-
+// logout a user
 router.get('/logout',(req,res)=>{
     res.clearCookie(process.env.cookieUserName);
     res.redirect('/login');

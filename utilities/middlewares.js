@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+// This functions determines a user is logged in or not
 module.exports.isLoggedin = async(req,res,next)=>{
 
     let cookies =

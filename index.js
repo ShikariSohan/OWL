@@ -30,7 +30,7 @@ const Comment = require('./models/comment');
 const {isLoggedin} = require('./utilities/middlewares');
 const timeAgo = require('./utilities/timeAgo');
 const cookieParser = require('cookie-parser');
-
+// Connecting MongoDb with Mongoose
 mongoose.connect(process.env.mongoURL,
     { useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -70,7 +70,7 @@ app.use((req,res,next)=>{
     res.locals.error = req.flash('error');
     next();
 });
-
+// Adding all routers
 app.use('/signup',signupRouter);
 app.use('/',loginRouter);
 app.use('/profile',isLoggedin,accRouter);
@@ -78,7 +78,7 @@ app.use('/saved',isLoggedin,saveRouter);
 app.use('/post',isLoggedin,postRouter);
 app.use('/',isLoggedin,communityRouter);
 
-
+// Search api for showing search result
 app.get('/search',isLoggedin,async(req,res)=>{
     const {searchText} = req.query;
     const posts = await Post.find({title : {"$regex": searchText, "$options": "i" }});
