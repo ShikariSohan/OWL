@@ -36,13 +36,25 @@
                 <label for="description"><h5>Description</h5></label>
                 <textarea class="form-control" name="post[description]" id="description" rows="13" cols="80" required>
                 </textarea>
-            </div>   
+            </div> 
+            <div class="form-group">
+              <select class="form-select form-select-lg mb-3" name="tag" aria-label=".form-select-lg example">
+                <option selected>Add a tag for your post</option>
+                <option value="Important"> Important </option>
+                <option value="Bug">Bug</option>
+                <option value="Help Needed">Help Needed</option>
+                <option value="Error"> Error </option>
+                <option value="Annoucement">Annoucement</option>
+                <option value="Help Needed">Help Needed</option>
+                <option value="Memes"> Memes </option>
+                <option value="New things">New things</option>
+              </select>
+          </div>   
             <div class="form-group">
               <label for="image">
                 <a class="btn btn-primary text-light" role="button" aria-disabled="false">+ Add Images</a>
                 
               </label>
-            
               <input type="file" name="image" accept="image/*" id="image" style="visibility: hidden; position: absolute;" multiple/>
               <p id="files-area">
                 <span id="filesList">

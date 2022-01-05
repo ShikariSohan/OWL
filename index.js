@@ -29,7 +29,6 @@ const Post = require('./models/post');
 const Comment = require('./models/comment');
 const {isLoggedin} = require('./utilities/middlewares');
 const timeAgo = require('./utilities/timeAgo');
-const router = require("./routers/community");
 const cookieParser = require('cookie-parser');
 
 mongoose.connect(process.env.mongoURL,
@@ -79,6 +78,13 @@ app.use('/saved',isLoggedin,saveRouter);
 app.use('/post',isLoggedin,postRouter);
 app.use('/',isLoggedin,communityRouter);
 
+
+app.get('/search',isLoggedin,async(req,res)=>{
+    const {searchText} = req.query;
+    const posts = await Post.find({title : {"$regex": searchText, "$options": "i" }});
+    res.render('search',{posts,timeAgo,searchText})
+    
+})
 
 //home
 let currentuser;
