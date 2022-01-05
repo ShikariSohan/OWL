@@ -1,0 +1,25 @@
+<%- include("partial/head") %>
+<div class="m-auto w-50">
+<div class="w-100 mb-2 shadow">
+    <table class="top-table mt-4">
+     <tr >
+     <th class="text-center">Username</th>
+     <th class="text-center col-2">Contribution</th>
+     </tr>
+     <% for(let user of users) {%> 
+     <tr class="text-center">
+        <%if(user.contribution<500){%>
+        <td style="font-size: small; font-weight: bolder; color: #28bbfa ;" ><%=user.name%></td>
+        <td style="font-size: small; font-weight: bolder; color: #28bbfa ;"><%=user.contribution%></td>
+        <%}else{%>
+         <td style="font-size: small; font-weight: bolder; color: #c808ee;"><%=user.name%></td>
+         <td style="font-size: small; font-weight: bolder; color: #c808ee; ;"><%=user.contribution%></td>
+         <% } %> 
+     </tr>
+     <%}%>
+    </table>
+ </div>
+</div>
+ <%- include("partial/newCommunity") %> 
+<%- include("partial/scripts") %>
+<%- include("partial/foot") %>

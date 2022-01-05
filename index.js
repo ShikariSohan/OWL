@@ -18,6 +18,7 @@ const loginRouter = require('./routers/login');
 const accRouter = require('./routers/myAcc');
 const postRouter = require('./routers/post');
 const saveRouter = require('./routers/saved');
+const contributors = require('./routers/contributors')
 const communityRouter = require('./routers/community')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -85,11 +86,22 @@ app.get('/',isLoggedin,async(req, res) => {
     currentuser = req.user;
     res.clearCookie('communityName');
     res.cookie('communityName', 'Owl');
-    //const posts =  await Post.find({community : "Owl"}).sort('-createdAt');   
+    //const posts =  await Post.find({community : "Owl"}).sort('-createdAt');
+    const users =  await User.find().sort({ contribution:-1 });   
     const posts =  await Post.find({}).sort('-createdAt');   
     const getUser = await User.findOne({_id: currentuser._id}) 
-    res.render("home",{posts,timeAgo,getUser});
+    res.render("home",{posts,timeAgo,getUser,users});
 });
+app.get('/topcontributors',isLoggedin,async(req,res)=>{
+    try{
+        const users =  await User.find().sort({ contribution:-1 });
+        res.render("topcontributors",{users});
+    }
+    catch(err){
+        console.log(err);
+        res.redirect("/");
+    }
+})
 //saved
 
 

@@ -6,60 +6,29 @@
       </div>
       <div class="d-flex m-2 p-2">
       <img style="margin-top: -50px;" src="/img/owl1.png " width="50px">
-      <h6><b>Welcome to home!</b></h6>
+      <h6><b>Welcome to Owl!</b></h6>
    </div>
-      </div>  
-    
+      </div> 
       <div class="sec1 mb-2 shadow">
-         <table class="top-table">
-          <tr >
-          <th class="text-center">Top Contributors</th>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>See more..</td>
-          </tr>
-         </table>
-      </div>
-      <div class="sec1 mb-2 shadow">
-         <table class="top-table">
-          <tr >
-          <th class="text-center">Top Communities</th>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>Sohan</td>
-          </tr>
-          <tr>
-             <td>See more..</td>
-          </tr>
-         </table>
+         <table class="top-table mt-4">
+            <tr >
+            <th class="text-center">Top Contributors</th>
+            </tr>
+            <% for(let user of users) {%> 
+            <tr class="text-center">
+               <%if(user.contribution<500){%>
+               <td style="font-size: small; font-weight: bolder; color: #28bbfa ;"><%=user.name%></td>
+               <%}else{%>
+                <td style="font-size: small; font-weight: bolder; color: #c808ee;"><%=user.name%></td>
+                <% } %> 
+                
+            </tr>
+            
+            <%}%>
+            <tr class="text-center">
+               <td style="font-size: small; font-weight: bolder;"><a href="/topcontributors">See More</a></td>
+            </tr>
+           </table>
       </div>
 </div>
-
 </div>

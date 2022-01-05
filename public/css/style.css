@@ -5,6 +5,7 @@
     src:url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 }
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap');
+
 html {
     height: 100%;
 }
@@ -522,4 +523,33 @@ outline: none;
 }
 .checked {
     color: orange;
+  }
+  #dp{
+      width: 150px;
+  }
+  .custom{
+      font-family: 'Exo 2',sans-serif;
+  }
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .btn {
+  
+    color: rgb(255, 255, 255);
+    background-color: var(--skyblue);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: small;
+    font-weight: bold;
+  }
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
   }
