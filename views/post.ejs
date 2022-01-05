@@ -26,11 +26,13 @@
 <div class="d-flex">
 <%- include("partial/sidebar_left") %>
 
-<div id="bdy-post">
+<div id="bdy">
   <div class="card mb-4 posts  shadow-sm" style="margin: auto; border-radius: 10px;" >
         <div class="card-body  mb-0 pb-0">
           <div class="card-title mb-2" style=" border-bottom: rgba(166, 168, 168, 0.788) 1px solid;">
-            <% if(currentUser._id === post.author._id) {%> 
+            
+            <% if(currentUser._id === post.author._id.toString() ) {%> 
+
             <div class="dropdown dropleft ml-4 "  style=" float:right;">
               <a href="#" type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
@@ -110,7 +112,7 @@
        <!--image end-->
         </div>
         <div class="d-flex justify-content-between">
-          <div class="d-flex">
+          <div class="d-flex" id="<%=getUser._id%>">
             <% if((getUser.upvotes_downvotes!=undefined)&&(getUser.upvotes_downvotes.find(clicked => { return clicked.postId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes.find(clicked => {  return clicked.postId.equals(post._id) }).types=="upvote")){%> 
           <button class="btn upvote upvote-btn clicked"><img
             src="/img/downvote.ico"
@@ -198,24 +200,134 @@
             <textarea class="form-control" name="comment" id="comment" rows="4" cols="150" required>
             </textarea>
         </div>            
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary mb-2">Comment</button>
     </form>
     </div>
+    
   <% for(let comment of comments){ %> 
-
-    <div class="card border-light mb-3" >
-      <div class="card-body">
-        <div class="card-text">
-        <%- comment.comment %> 
+    <%if(comment.IsReply===false){%>
+  <div class="m-0 p-0">
+  <div class='m-0 p-0 comment'>
+    
+    <div class="card mb-4 shadow-sm" style="border-radius: 10px;">
+      <div class="card-body"> 
+        <div class="d-flex m-0 p-0"> 
+        <a class="d-flex" href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.avatar.url %>" class="avatar1" >
+          <p class="card-text ml-2" style="font-size: smaller;"><b><%= comment.author.name %></b></p></a> 
+          <p class="m-0 p-0 pl-2 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(comment.createdAt).toString()%>"><%=timeAgo.format((comment.createdAt.getTime()))%></p>        
+        </div>
+        <div class="card-text m-0 p-0 ml-2" id=<%=getUser._id%> >
+          <%- comment.comment %> 
+          <div class="d-flex m-0 p-0" id="<%=comment._id%>">
+            <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(comment._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="upvote")){%> 
+              <button class="btn upvote upvote-btn-comment clicked-comment"><img
+                src="/img/downvote.ico"
+                width="1" height="1"
+                alt="cant load"
+                loading="lazy"
+                
+              /></button>
+              <% }else{%>
+                <button class="btn upvote upvote-btn-comment"><img
+                  src="/img/downvote.ico"
+                  width="1" height="1"
+                  alt="cant load"
+                  loading="lazy"
+          
+                /></button>
+                <%}%>
+                <p class="upvote-count-comment mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=comment.upvotes %> </p>
+                <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment.find(clicked => { return clicked.commentId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="downvote")){%>     
+                <button class="btn upvote downvote-btn-comment clicked-downvote"><img
+                  src="/img/downvote.ico"
+                  width="1" height="1"
+                  alt="cant load"
+                  loading="lazy"
+          
+                /></button>
+                <%}else{%>
+                  <button class="btn upvote downvote-btn-comment"><img
+                    src="/img/downvote.ico"
+                    width="1" height="1"
+                    alt="cant load"
+                    loading="lazy"
+            
+                  /></button>
+                  <%}%>
+                  <p class="downvote-count-comment mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=comment.downvotes %> </p>
+                  <!-- Button trigger modal -->
+                  <button class="btn report-btn" style="background-color: rgba(110, 105, 105, 0);" data-toggle="modal" data-target="#modalContactForm">
+                   <i class="fa fa-flag-o report" ></i>
+                 </button>
+          <a class="m-0 p-0 reply mt-2" style="font-size: 14px;" href="#">Reply</a>
+        </div>
+        </div>
       </div>
-      </div>
-      <div class="card-footer">
-        <div style="float: right;"><a class="d-flex" href="/profile/<%=comment.author._id%>"><img src="<%=comment.author.avatar.url %>" class="avatar1" >
-        <p class="card-text ml-2" style="font-size: smaller;"><b><%= comment.author.name %></b></p></a>
+    </div>
+    
+  </div>
+   <% for(let reply of comment.reply){%> 
+    <div class="card  mb-4 shadow-sm" style="border-radius: 10px; margin-left: 50px;" >
+      <div class="card-body"> 
+        <div class="d-flex m-0 p-0"> 
+        <a class="d-flex" href="/profile/<%=reply.author._id%>"><img src="<%=reply.author.avatar.url %>" class="avatar1" >
+          <p class="card-text ml-2" style="font-size: smaller;"><b><%= reply.author.name %></b></p></a> 
+          <p class="m-0 p-0 pl-2 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(reply.createdAt).toString()%>"><%=timeAgo.format((reply.createdAt.getTime()))%></p>        
+        </div>
+        <div class="card-text ml-2">
+          <%- reply.comment %> 
+          <div class="d-flex m-0 p-0" id=<%=reply.id%> >
+            <% if((getUser.upvotes_downvotes_comment!=undefined)&&(getUser.upvotes_downvotes_comment
+            .find(clicked => { return clicked.commentId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes_comment.find(clicked => {  return clicked.commentId.equals(comment._id) }).types=="upvote")){%> 
+              <button class="btn upvote upvote-btn clicked-comment"><img
+                src="/img/downvote.ico"
+                width="1" height="1"
+                alt="cant load"
+                loading="lazy"
+                
+              /></button>
+              <% }else{%>
+                <button class="btn upvote upvote-btn-comment"><img
+                  src="/img/downvote.ico"
+                  width="1" height="1"
+                  alt="cant load"
+                  loading="lazy"
+          
+                /></button>
+                <%}%>
+                <p class="upvote-count mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=post.upvotes %> </p>
+                <% if((getUser.upvotes_downvotes!=undefined)&&(getUser.upvotes_downvotes.find(clicked => { return clicked.postId.equals(post._id)})!==undefined) && (getUser.upvotes_downvotes.find(clicked => {  return clicked.postId.equals(post._id) }).types=="downvote")){%>     
+                <button class="btn upvote downvote-btn-comment clicked-downvote-comment"><img
+                  src="/img/downvote.ico"
+                  width="1" height="1"
+                  alt="cant load"
+                  loading="lazy"
+          
+                /></button>
+                <%}else{%>
+                  <button class="btn upvote downvote-btn-comment"><img
+                    src="/img/downvote.ico"
+                    width="1" height="1"
+                    alt="cant load"
+                    loading="lazy"
+            
+                  /></button>
+                  <%}%>
+                  <p class="downvote-count-comment mt-2 mr-2" style="font-size: small;color: rgb(110, 105, 105);"><%=comment.downvotes %> </p>
+                  <!-- Button trigger modal -->
+                  <button class="btn report-btn" style="background-color: rgba(110, 105, 105, 0);" data-toggle="modal" data-target="#modalContactForm">
+                   <i class="fa fa-flag-o report" ></i>
+                 </button>
+        </div>
         </div>
       </div>
     </div>
     <% } %> 
+    <form action="/post/<%=post._id%>/comment/<%=comment._id%>" class="ml-4" method="POST">
+    </form>
+  </div>
+    <% } %>
+    <% } %>
     
 </div>
 <!-- New PopUp Modal For create Community -->
@@ -234,6 +346,7 @@
  }
 }, null, null, 15 );
 } );
+
 </script>
 
 <%- include("partial/foot") %>

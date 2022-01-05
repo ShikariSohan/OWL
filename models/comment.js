@@ -17,11 +17,20 @@ const CommentSchema = new Schema({
         autopopulate: true,
         required: true
     },
-    parent:{
+    upvotes:{
+        type:Number
+    },
+    downvotes:{
+        type:Number
+    },
+    IsReply:{
+        type:Boolean
+    },
+    reply:[{
         type: Schema.Types.ObjectId,
         ref: 'Comment',
-        required : false
-    }     
+        autopopulate:true
+    } ]   
 },
 {
     timestamps: true

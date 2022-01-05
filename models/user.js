@@ -45,6 +45,12 @@ const User  =  new Schema({
         postId:{ type: Schema.Types.ObjectId , ref:'Post'},
         types: String
     }],
+    upvotes_downvotes_comment:[
+        {
+            commentId:{ type: Schema.Types.ObjectId , ref:'Comment'},
+            types: String
+        }
+    ],
     isSuperAdmin:{
         type:Boolean , 
         default : false

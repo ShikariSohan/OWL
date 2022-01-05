@@ -5,6 +5,9 @@
     src:url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 }
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap');
+html {
+    height: 100%;
+}
 body { 
     padding-top: 70px; 
     background-color: #E5E5E5;
@@ -276,6 +279,26 @@ a[data-toggle="collapse"] {
     background: url('/img/downvote.png') no-repeat 2px 4px;
     cursor: pointer;
 }
+/* comment */
+.downvote-btn-comment{
+    background: url('/img/downvote.png') no-repeat 2px -27px;
+    cursor: pointer;
+    
+  }
+  .upvote-btn-comment{
+    background: url('/img/upvote.png') no-repeat 2px -27px;
+    cursor: pointer;
+    
+}
+.clicked-comment{
+    background: url('/img/upvote.png') no-repeat 2px 4px;
+    cursor: pointer;
+}
+.clicked-downvote-comment{
+    background: url('/img/downvote.png') no-repeat 2px 4px;
+    cursor: pointer;
+}
+/*comment end*/
 .see-more{
     margin: 0;
     padding: 0;

@@ -27,6 +27,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// The default plugins included in the basic setup define some buttons that
 	// are not needed in a basic editor. They are removed here.
+	config.height = 100; 
 	config.extraPlugins='codesnippet,lineutils,widget',
 	config.codeSnippet_theme ='atelier-heath.light',
 	config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript';
