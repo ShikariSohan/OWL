@@ -7,12 +7,9 @@
         <li>
             <a href="/newrequest">New member Request
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    ?? 
+                    <%= totalRequest %>   
                   </span>
             </a>
-        </li>
-        <li>
-            <a data-toggle="modal" data-target="#exampleModal" data-whatever="hello"> Create Community</a>
         </li>
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Community</a>
@@ -29,10 +26,18 @@
             </ul>
         </li>
         <li>
-            <a href="#">Reading List</a>
+            <a href="/fyc">Logs
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    ?? 
+                  </span>
+            </a>
         </li>
         <li>
-            <a href="#">Acheveiments</a>
+            <a href="#">Reports
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    <%= totalRequest %>   
+                  </span>
+            </a>
         </li>
         <li>
             <a href="#">Settings</a>

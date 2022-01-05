@@ -1,0 +1,32 @@
+<%- include("partial/head") %>
+<%- include("partial/simplenavbar") %>
+<%- include("partial/sidebar_left") %>
+<%- include("partial/sidebar_right") %>
+<div class="card p-4 w-50 m-auto">
+    <h1 class="display-4">Explore new Communities - </h1>
+  <% communities.forEach((community,index)=>{ %> 
+    <% if(!(currentUser.community.filter(e => e.name === community.name).length > 0)){ %> 
+  <div class="card m-1">
+    <div class="card-body">
+      <% if (community.isPrivate) { %>
+        <small class="float-right text-muted">private</small>
+      <% } else {%>
+        <small class="float-right text-muted">public</small>
+      <% } %> 
+      <h4><%= community.name %> </h4> 
+      <h6>Description:</h6>
+      <p style="font-size: 14px; color: rgb(110, 105, 105);"><%= community.description %> </p>
+      <% if(!(currentUser.requestedCommunity.filter(e => e.name === community.name).length > 0)){ %> 
+      <a href="/join/<%=community.name %> " class="btn btn-primary">Join</a> 
+      <% } else {%>
+        <button type="button" class="btn btn-warning disabled">Request Pending</button>
+       <% } %>  
+    </div>
+  </div>
+  <% }}) %> 
+</div>
+
+<!-- New PopUp Modal For create Community -->
+<%- include("partial/newCommunity") %> 
+<%- include("partial/scripts") %>
+<%- include("partial/foot") %>

@@ -16,9 +16,9 @@ router.post('/',upload.single('image') ,async (req, res) => {
     const {name,department,reg,email} = req.body.user;
     const user = new User({email:email,name:name,department:department,reg:reg});
     user.image = {url: req.file.path, filename: req.file.filename};
+    user.contribution = 100;
     const newUser = await User.create(user);
-    console.log(newUser);
-    req.flash('error',"Please Watch your email for your verification");
+    req.flash('error',"Please check your email for your verification");
     res.redirect('/login');
   }
   catch (err)

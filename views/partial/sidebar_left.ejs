@@ -2,7 +2,7 @@
 
     <ul class="list-unstyled components">
         <li>
-            <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.image %>" class="avatar1"><br><b><%=currentUser.name%></b>
+            <a href="/profile/<%=currentUser._id%>" class="text-center ml-2 mr-2" style="padding-left:0; border-bottom: rgba(166, 168, 168, 0.788) 1px solid;"><img src="<%=currentUser.image.url %>" class="avatar1"><br><b><%=currentUser.name%></b>
             <br>Contribution: 0</a>
         </li>
         
@@ -13,7 +13,7 @@
             <a href="#"><i class="fa fa-hashtag mr-2"></i> Tags</a>
         </li>
         <li>
-            <a href="#" class="joinGrp"  onmouseout="JoinGrp();"><img class=" mr-2"
+            <a href="/c/joincommunites" class="joinGrp"  onmouseout="JoinGrp();"><img class=" mr-2"
                 src="/img/join.png"
                 alt="cant load"
                 loading="lazy" 
@@ -34,9 +34,12 @@
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users mr-2" aria-hidden="true"></i>My Communities</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li class="drpd">
-                    <a href="#">CSE 2018</a>
-                </li >
+                <% if(currentUser.community.length>0) {%> 
+                    <% currentUser.community.forEach((com,i) => {%>
+                        <li class="drpd">
+                            <a href="/c/<%= com.name%>"><%= com.name%> </a>
+                        </li >
+                      <%})}%>
             </ul>
         </li>
         <li>

@@ -72,8 +72,8 @@
               <p class='m-0 p-0' style="font-size:large; font-weight: bold;"><%=post.title%></p>
             </a>
           </div>
-            <p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(post.createdAt).toString()%>"><%=timeAgo.format((post.createdAt.getTime()))%></p>
-          
+          <p class="m-0 p-0 pb-2 float-right" style="font-size: small; color: rgb(110, 106, 106);" data-toggle="tooltip" title="<%= new Date(post.createdAt).toString()%>"><%=timeAgo.format((post.createdAt.getTime()))%></p>
+          <a href="c/<%=post.community%>"><p class="m-0 p-0 pb-2" style="font-size: small; color: rgb(110, 106, 106);"><%=post.community%></p></a>
           </div>
           <div class="card-text m-2 p-2">
               <div class="collapsed m-0 p-0">
@@ -330,6 +330,9 @@
     <% } %>
     
 </div>
+<!-- New PopUp Modal For create Community -->
+<%- include("partial/newCommunity") %> 
+<%- include("partial/sidebar_right") %>
 
 <%- include("partial/scripts") %>
 <script>

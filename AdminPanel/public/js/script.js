@@ -93,4 +93,3 @@ $('.fa-info').on('click',function(){
   $('#info').toggleClass('d-none');
   $('#sidebar').removeClass('active');
 });
-

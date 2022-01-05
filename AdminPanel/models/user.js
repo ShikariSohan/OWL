@@ -1,4 +1,5 @@
 const  Mongoose  = require('mongoose');
+const Post = require('./post');
 const Schema = Mongoose.Schema;
 
 User  =  new Schema({
@@ -36,10 +37,33 @@ User  =  new Schema({
         type :Boolean ,
         default : false
     },
+    saves:[{
+        type: Schema.Types.ObjectId,
+        ref:Post,
+        autopopulate: true
+    }],
     upvotes_downvotes:[{
-        postId:{ type: Schema.Types.ObjectId , ref:'Post'},
+        postId:{ type: Schema.Types.ObjectId , ref:Post},
         types: String
     }],
+    isSuperAdmin:{
+        type:Boolean , 
+        default : false
+    },
+    community:[{
+        name :{type:String},
+        isAdmin:{
+            type :Boolean ,
+            default : false
+        }
+    }],
+    requestedCommunity:[{
+        name :{type:String}
+    }],
+    contribution : {
+        type : Number
+    }
 
 });
+User.plugin(require('mongoose-autopopulate'));
 module.exports = Mongoose.model('User',User);

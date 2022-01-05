@@ -8,7 +8,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="newCommunityForm"action="/c/new" method="POST">
+          <form id="newCommunityForm" action="/c/new" method="POST">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Community Name:</label>
               <input type="text" class="form-control" id="recipient-name" name="name">
@@ -18,11 +18,11 @@
               <textarea class="form-control" id="message-text" name="description"></textarea>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="public" checked>
                 <label class="custom-control-label" for="customRadio1">Public</label>
               </div>
               <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="private">
                 <label class="custom-control-label" for="customRadio2">Private</label>
             </div>
           </form>

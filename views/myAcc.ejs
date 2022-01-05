@@ -1,4 +1,5 @@
 <%- include("partial/head") %>
+<%- include("partial/simplenavbar") %>
 <%- include("partial/sidebar_left") %>
     <div class="card p-4 w-50 m-auto">
       <% if(user) {%> 
@@ -36,6 +37,8 @@
       </div>
 
 <% } %> 
+<!-- New PopUp Modal For create Community -->
+<%- include("partial/newCommunity") %> 
 <%- include("partial/scripts") %>
 <script>
    let loadFile = function(event) {

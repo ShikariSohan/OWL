@@ -1,7 +1,7 @@
 const  Mongoose  = require('mongoose');
 const Schema = Mongoose.Schema;
 
-User  =  new Schema({
+const User  =  new Schema({
     email : {
         type : String,
         required : true,
@@ -51,8 +51,22 @@ User  =  new Schema({
             types: String
         }
     ],
-    star:{
-        type: Number
+    isSuperAdmin:{
+        type:Boolean , 
+        default : false
+    },
+    community:[{
+        name :{type:String},
+        isAdmin:{
+            type :Boolean ,
+            default : false
+        }
+    }],
+    requestedCommunity:[{
+        name :{type:String}
+    }],
+    contribution : {
+        type : Number
     }
 
 });

@@ -15,7 +15,6 @@ router.get('/new', (req, res) => {
 });
 router.post('/new', upload.array('image'), async(req, res) => {
     try{  
-   
     const post = new Post(req.body.post);
     if(req.files)
         post.image = req.files.map(f => ({url:f.path, filename: f.filename}));
@@ -23,13 +22,15 @@ router.post('/new', upload.array('image'), async(req, res) => {
     post.upvotes = 0;
     post.downvotes = 0;
     post.comments = 0;
+    post.community=req.cookies['communityName'];
     await post.save();  
     
     console.log(post);
-    res.redirect('/');
+    res.redirect('/c/'+req.cookies['communityName']);
     }
     catch(err)
     {
+        console.log(err)
         req.flash('error',err.message);
         res.redirect('/');
     }
@@ -104,7 +105,7 @@ router.post('/:postid/comment/:id/',async(req,res)=>{
 //Post get by id 
 router.get('/:id', async(req, res) => {
     try{
-        currentuser = req.user;
+        let currentuser = req.user;
         const getUser = await User.findOne({_id: currentuser._id})
         const post =  await Post.findOne({ _id: req.params.id});
         const comments = await Comment.find({post: req.params.id}).sort('-updatedAt');
