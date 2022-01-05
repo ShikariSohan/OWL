@@ -78,6 +78,14 @@ app.use('/saved',isLoggedin,saveRouter);
 app.use('/post',isLoggedin,postRouter);
 app.use('/',isLoggedin,communityRouter);
 
+app.get('/search',isLoggedin,async(req,res)=>{
+    const {searchText} = req.query;
+    const posts = await Post.find({title : {"$regex": searchText, "$options": "i" }});
+    posts.forEach((e)=>{
+        console.log(e.title)
+    })
+    
+})
 
 //home
 let currentuser;
