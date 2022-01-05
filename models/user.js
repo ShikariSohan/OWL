@@ -58,7 +58,10 @@ const User  =  new Schema({
     }],
     requestedCommunity:[{
         name :{type:String}
-    }]
+    }],
+    contribution : {
+        type : Number
+    }
 
 });
 User.plugin(require('mongoose-autopopulate'));
